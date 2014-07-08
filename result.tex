@@ -3,10 +3,10 @@
 
 Defined at the end of the Chapter~\ref{chap:intro}, the four objectives of this thesis are to augment the COACH system with an emotional reasoning engine based on BayesACT so that the augmented system: (1) is designed in a portable and extensible way; (2) runs in real-time from the perspective of the user group; (3) provides at least a level of functional assistance of as high quality as the COACH; (4) is able to tune the prompts in some way according to the emotional state of a user. It has been showed in the Chapter~\ref{chap:design} and Chapter~\ref{chap:impl} that the system we developed is easy to be extended. Experiments conducted on the system show that an average latency of 46.79ms is caused by the Observer component of the system, 0.009ms by the Buffer, and 1.65s by the Updater. The overall average latency of the system is around 1.70s, which means that the system runs in real-time from the perspective of its user group. 
 
-We demonstrate in this section by laboratory based tests that the system is also able to provide a level of functional assistance and to produce system prompts that have encoded to some extent the emotional state of the user. The tests were conducted on a PC running 64-bit Ubuntu 12.04 LTS, with AMD FX(tm)-6300 Six-Core Processor × 6 and NVIDIA GeForce GTX 650 Ti Graphics Card. A kinect camera was mounted above the sink area and was the only sensor of the system.
+We demonstrate in this section by laboratory based tests that the system is also able to provide a level of functional assistance and to produce system prompts that have encoded to some extent the emotional state of the user. The tests were conducted on a PC running 64-bit Ubuntu 12.04 LTS, with AMD FX(tm)-6300 Six-Core Processor × 6 and NVIDIA GeForce GTX 650 Ti Graphics Card. $A$ kinect camera was mounted above the sink area and was the only sensor of the system.
 
 \section{Parameter Setup}
-This paragraph explains how the values of threshold variables $distance$ and $difference$ used in the EPA-Calculator were assigned based on statistical results obtained from experiments as follows. Videos were recorded while a person washed her hands with different emotions in nine complete hand-washing trials. A total number of 13703 frames were extracted from the videos. For each frame, the distances between the person's two hands were computed. For each pair of neighbouring frames, the distances that the person's hands moved between the frames were calculated as well. Histograms of the two ``distances'' are shown in Figure~\ref{fig:histogram}. Note that in around 69\% of the frames, the distances between the user's hands falls into the range of $(8, 40]$. Note also that in around 70\% of frames, the distances the user's hands have moved from their positions in the last frames falls into the range of $(3.5, 17.5]$. Based on analysis of the the distributions of the two ``distances'', we assigned the values of variables used in the EPA-Calculator as following: $distance = \{-\infty, 0, 8, 40, 128, 160, +\infty\}$, $potency = \{-4.3, -4.3, 0, 1, 2, 4.3, 4.3\}$, $difference = \{-\infty, 0, 3.5, 17.5, 35, 70, +\infty\}$, and $activity = \{-4.3, -4.3, -2, -1, 0, 4.3, 4.3\}$. Table~\ref{table:param-setting} shows an overview of the values assigned to important variables in our tests of the system. 
+This paragraph explains how the values of threshold variables $distance$ and $difference$ used in the EPA-Calculator were assigned based on statistical results obtained from experiments as follows. Videos were recorded while a person washed her hands with different emotions in nine complete hand-washing trials. $A$ total number of 13703 frames were extracted from the videos. For each frame, the distances between the person's two hands were computed. For each pair of neighbouring frames, the distances that the person's hands moved between the frames were calculated as well. Histograms of the two ``distances'' are shown in Figure~\ref{fig:histogram}. Note that in around 69\% of the frames, the distances between the user's hands falls into the range of $(8, 40]$. Note also that in around 70\% of frames, the distances the user's hands have moved from their positions in the last frames falls into the range of $(3.5, 17.5]$. Based on analysis of the the distributions of the two ``distances'', we assigned the values of variables used in the EPA-Calculator as following: $distance = \{-\infty, 0, 8, 40, 128, 160, +\infty\}$, $potency = \{-4.3, -4.3, 0, 1, 2, 4.3, 4.3\}$, $difference = \{-\infty, 0, 3.5, 17.5, 35, 70, +\infty\}$, and $activity = \{-4.3, -4.3, -2, -1, 0, 4.3, 4.3\}$. Table~\ref{table:param-setting} shows an overview of the values assigned to important variables in our tests of the system. 
 
 %
 % figure:Histograms 
@@ -125,7 +125,7 @@ $\begin{bmatrix}
 -1.03
 \end{bmatrix}$ &
 %column-6
-N/A &
+N/$A$ &
 %column-7
 No Prompt
 \\ \hline
@@ -188,7 +188,7 @@ $\begin{bmatrix}
 -0.66
 \end{bmatrix}$ &
 %column-6
-N/A &
+N/$A$ &
 %column-7
 No Prompt
 \\ \hline
@@ -215,7 +215,7 @@ $\begin{bmatrix}
 -0.43
 \end{bmatrix}$ &
 %column-6
-N/A &
+N/$A$ &
 %column-7
 No Prompt
 \\ \hline
@@ -242,7 +242,7 @@ $\begin{bmatrix}
 -0.47
 \end{bmatrix}$ &
 %column-6
-N/A &
+N/$A$ &
 %column-7
 No Prompt
 \\ \hline
@@ -398,7 +398,7 @@ $\begin{bmatrix}
 -1.84
 \end{bmatrix}$ &
 %column-6
-N/A &
+N/$A$ &
 %column-7
 No Prompt
 \\ \hline
@@ -425,7 +425,7 @@ $\begin{bmatrix}
 -1.46
 \end{bmatrix}$ &
 %column-6
-N/A &
+N/$A$ &
 %column-7
 No Prompt
 \\ \hline
@@ -452,7 +452,7 @@ $\begin{bmatrix}
 -1.32
 \end{bmatrix}$ &
 %column-6
-N/A &
+N/$A$ &
 %column-7
 No Prompt
 \\ \hline
@@ -516,7 +516,7 @@ $\begin{bmatrix}
 -1.25
 \end{bmatrix}$ &
 %column-6
-N/A &
+N/$A$ &
 %column-7
 No Prompt
 \\ \hline
@@ -615,16 +615,52 @@ To demonstrate that the system is able to work emotionally, this subsection comp
 
 %
 % table: Comparison of EPA values in the two tests
-\begin{table}
+\begin{table}\footnotesize
 \centering
 \caption{Comparison of EPA values in the two tests}
 \label{table:compare-epa-the-two}
-\begin{tabular}{|  p{0.7cm} | p{2.5cm} |  p{3.0cm} |  p{3.0cm} |  p{3.0cm} | p{2.6cm} |}
+\begin{tabular}{|  p{0.5cm} | p{2.1cm} |  p{3.1cm} |  p{2.9cm} |  p{2.9cm} | p{2.3cm} |}
 \hline
-\footnotesize
-Test & mean of User Behaviour & init of f\_c & final of f\_c & mean of f\_c & mean of system prompt \\ \hline
+Test & mean of user behav. & init of f\_c & final of f\_c & mean of f\_c & mean of system prompt \\ \hline
 t1 & $[0,1.32,-1.3]$ & $[1.61,0.84,-0.87]$ & $[3.31,1.04,-0.57]$ & $[2.8,1.03,-0.73]$ & $[1.62,0.32,0.75]$ \\ \hline
 t2 & $[0,0.77,-1.74]$ & $[-0.64,-0.43,-1.81]$ & $[1.83,-0.45,-1.24]$ & $[1.13,-0.43,-1.47]$ & $[1.53,0.66,0.08]$ \\ \hline
 \end{tabular}
 \end{table}
 
+As shown in Tables~\ref{table:result-1} and ~\ref{table:result-2}, throughout the tests, the user behaviours in the first test generally had larger $P$ and larger $A$ values than those in the second test. The $P$ and $A$ values computed for user behaviours in test \#1 reached an average of $[1.32, -1.3]$, while that in the second test was $[0.77, -1.74]$. This phenomenon accords well with how the actor acted in the two tests, which illustrates that the $P$ and $A$ values of user behaviours computed by the EPA-Calculator are reasonable.
+
+As also shown in Tables~\ref{table:result-1} and ~\ref{table:result-2}, throughout the tests, the $f\_c$'s in the first test generally had larger $P$ and larger $A$ values than those in the second test, and the system prompts in the first test generally had smaller $P$ and higher $A$ values. The mean of the EPA values of $f\_c$'s in the two tests were $[2.8, 1.03, -0.73]$ and $[1.13, -0.43, -1.47]$, respectively. And the mean of the EPA values of system prompts in the two tests were [1.62, 0.32, 0.75] and [1.53, 0.66, 0.08]. Note that prompts with lower $P$ values and higher $A$ values are produced for identities with higher $P$ values and higher $A$ values. This correlation makes sense since that people who think themselves as powerful persons tend to expect respect from others in interactions (i.e. prompts should be expressed to them with low potency levels), and that active people are likely to interact better with persons who are active as well. 
+
+To check if this correlation between the $P$ and $A$ values of identities and system prompts is just a coincidence, a total of 17 tests (including the two described above) of the system were conducted. Among all the 17 tests, the actor performed more powerfully and more actively in 10 of them, and performed less powerfully and less actively in the other 7 runs. For all these tests, the parameter settings shown in Table~\ref{table:param-setting} were used. The initialization of $f\_c$'s and the means of EPA values for user behaviours, $f\_c$'s and system prompts are shown in Table~\ref{table:compare-epa-all}. The state change details of the 17 runs (including the two described above) are provided in the appendix of this thesis. For easier readings, data in Table~\ref{table:compare-epa-all} are sorted in descending order of the $A$ and $P$ values of the user behaviours. From the results shown in the table, we can see that comparing with the bottom rows, the top rows generally have:
+(1) larger (and larger) $P$ (and $A$) values for user behaviours, which accords well with how the actor acted in the tests;
+(2) larger (and larger) $P$ (and $A$) values for $f\_c$'s;
+(3) smaller (and larger) $P$ (and $A$) values for prompts, among which the differences between $A$ values are more obvious.
+
+%
+% table: EPA values in 17 tests
+\begin{table}\small
+\centering
+\caption{EPA values in 17 tests}
+\label{table:compare-epa-all}
+\begin{tabular}{|  p{1.2cm} | p{2.6cm} |  p{3.5cm} |  p{3.4cm} |  p{3.0cm} |}
+\hline
+number & mean of user behaviour & init of $f\_c$ & mean of $f\_c$ & mean of system prompt \\ \hline
+1 & $[0, 1.8, -0.59]$ & $[1.59, 0.83, -0.87]$ & $[1.62, 1.12, -0.29]$ & $[1.89, 0.55, 0.41]$ \\ \hline
+2 & $[0, 1.37, -0.68]$ & $[1.58, 0.81, -0.94]$ & $[2.3, 0.87, -0.45]$ & $[1.71, 0.44, 0.53]$ \\ \hline
+3 & $[0, 1.89, -0.81]$ & $[1.52, 0.85, -0.9]$ & $[1.51, 1.01, -1.28]$ & $[1.75, 0.3, 0.44]$ \\ \hline
+4 & $[0, 1.36, -0.85]$ & $[1.54, 0.78, -0.89]$ & $[3.21, 0.51, -0.38]$ & $[1.46, 0.4, 0.71]$ \\ \hline
+5 & $[0, 1.13, -1.05]$ & $[1.59, 0.8, -0.87]$ & $[2.6, 0.62, -0.55]$ & $[1.7, 0.48, 0.69]$ \\ \hline
+6 & $[0, 1.16, -1.13]$ & $[1.71, 0.84, -0.89]$ & $[2.12, 0.53, -0.63]$ & $[1.78, 0.56, 0.65]$ \\ \hline
+7 & $[0, 1.32, -1.3]$ & $[1.61, 0.84, -0.87]$ & $[2.8, 1.03, -0.73]$ & $[1.62, 0.32, 0.75]$ \\ \hline
+8 & $[0, 1.29, -1.36]$ & $[1.56, 0.79, -0.89]$ & $[2.39, 0.87, -0.86]$ & $[1.77, 0.44, 0.54]$ \\ \hline
+9 & $[0, 1.15, -1.36]$ & $[1.61, 0.83, -0.9]$ & $[2.3, 0.7, -1.08]$ & $[1.73, 0.57, 0.63]$ \\ \hline
+10 & $[0, 1.13, -1.38]$ & $[1.51, 0.82, -0.89]$ & $[2.37, 0.24, -0.57]$ & $[1.55, 0.55, 0.38]$ \\ \hline
+11 & $[0, 0.42, -1.51]$ & $[-0.7, -0.43, -1.77]$ & $[0.9, -0.2, -1.15]$ & $[1.5, 0.78, 0.07]$ \\ \hline
+12 & $[0, 0.48, -1.59]$ & $[-0.59, -0.45, -1.71]$ & $[1.01, -0.01, -1.02]$ & $[1.71, 0.64, 0.31]$ \\ \hline
+13 & $[0, 0.92, -1.6]$ & $[-0.71, -0.4, -1.75]$ & $[2.33, 0.41, -0.98]$ & $[1.55, 0.55, 0.63]$ \\ \hline
+14 & $[0, 0.79, -1.63]$ & $[-0.72, -0.46, -1.84]$ & $[0.69, -0.3, -1.78]$ & $[1.54, 0.58, 0.03]$ \\ \hline
+15 & $[0, 0.82, -1.64]$ & $[-0.57, -0.39, -1.75]$ & $[1.17, 0.27, -1.64]$ & $[1.64, 0.74, 0.32]$ \\ \hline
+16 & $[0, 0.77, -1.74]$ & $[-0.64, -0.43, -1.81]$ & $[1.13, -0.43, -1.47]$ & $[1.53, 0.66, 0.08]$ \\ \hline
+17 & $[0, 0.79, -1.75]$ & $[-0.61, -0.38, -1.77]$ & $[1.35, 0.54, -1.71]$ & $[1.56, 0.42, 0.47]$ \\ \hline
+\end{tabular}
+\end{table}
