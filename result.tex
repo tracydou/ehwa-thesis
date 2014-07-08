@@ -46,24 +46,56 @@ $f\_c^{0}$ & Different in each test &Updater \\ \hline
 \centering
 \caption{State changes in test \#1 of the system}
 \label{table:result-1}
-\begin{tabular}{| l | p{2.8cm} | p{1.8cm} | p{1.8cm} | p{1.8cm} | p{1.8cm} | p{3cm} |}
+\begin{tabular}{| V{0.9cm} | V{2.8cm} | V{1.7cm} | V{2.1cm} | V{1.7cm} | V{1.7cm} | V{2.8cm} |}
 \hline
 
 Time &
 User Behaviour (screenshot) &
-Behaviour: prop./epa &
+Behaviour prop./epa &
 Planstep Belief &
 f\_c &
 Prompt: prop./epa &
 Avatar (screenshot) \\ \hline
 
+
+
+%column-1
 t1 &
-\raisebox{-\totalheight}{\includegraphics[width=2.8cm]{fig/system/_fast2-towel1_.jpg}} &
-\parbox[t]{1.8cm}{TOWEL $[0,\\ 1.86,\\ -1.7]$} &
-\parbox[t]{1.8cm}{$[1.00, 0.00,\\ 0.00, 0.00,\\ 0.00, 0.00,\\ 0.00, 0.00]$\\ most likely\\ planstep = $0$ }&
-$[1.7, 1.41, -1.39]$ &
-``turn on water'' $[1.82, 0.22, 0.47]$ &
-fig \\ \hline
+%column-2
+\vskip 0.15cm
+\includegraphics[width=\linewidth]{fig/system/_fast2-towel1_.jpg} &
+%column-3
+TOWEL
+\vskip 0.2cm
+$\begin{bmatrix}
+0 \\
+1.86 \\
+-1.7
+\end{bmatrix}$ &
+%column-4
+\begin{minipage}[c]{\linewidth} \centering
+[1.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] most likely planstep=0
+\end{minipage} &
+%column-5
+$\begin{bmatrix}
+1.7 \\
+1.41 \\
+-1.39
+\end{bmatrix}$ &
+%column-6
+``turn on water''
+\vskip 0.2cm
+$\begin{bmatrix}
+1.82 \\
+0.22 \\
+0.47
+\end{bmatrix}$ &
+%column-7
+\vskip 0.15cm
+\includegraphics[width=\linewidth]{fig/prompt/_can-you-come-back-soon_.jpg}
+\\ \hline
+
+
 
 \end{tabular}
 \end{table}
