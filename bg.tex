@@ -58,7 +58,11 @@ To sum up, the BayesACT model includes states $S = \{F, T, X\}$, observations $\
 
 --- The deflection between fundamental sentiments $F$ and transient impressions $T$, denoted as  $\phi(F, T)$, is defined as a nine-dimensional weighted Euclidean distance between $F$ and $T$. The distance measure is proposed by the authors of \cite{hoey2013bayesian} as the logarithm of a probabilistic potential: $\phi(f,t) \propto e^{-(f'-t')\Sigma^{-1}(f-t)}$, where $\Sigma$ is a general representation of weights. 
 
---- The probability of a post-action fundamental sentiments $f'$ is computed by combining the deflection $\phi(f',t')$ with an ``inertial'' term that stabilizes the fundamentals over time. It gives the probabilistic generalization of the Affect Control Principle (Definition~\ref{def:act}). This can be illustrated by the following formula: $Pr(f'|f,t,x,b_{a},\phi) \propto e^{-\phi(f',t')-\xi(f',f,b_{a},x)}$, where $t'$ can be computed from $\{f', t, x\}$ by empirically derived prediction equations of ACT, and represents the temporal dynamics of f encoding both the stability of a?ective identities and the predictive dynamics of a?ective behaviours. $\xi$ is such that: (1) $f_{b}' = b_{a}$ if the agent is acting, and unconstrained if otherwise; (2) $f_{a}'$ and $f_{c}'$ are likely to be close to $f_{a}$, $f_{c}$, respectively.
+--- The probability of a post-action fundamental sentiments $f'$ is computed by combining the deflection $\phi(f',t')$ with an ``inertial'' term that stabilizes the fundamentals over time. It gives the probabilistic generalization of the Affect Control Principle (Definition~\ref{def:act}). This can be illustrated by the following formula: \\
+\begin{equation*}
+Pr(f'|f,t,x,b_{a},\phi) \propto e^{-\phi(f',t')-\xi(f',f,b_{a},x)}, 
+\end{equation*}
+where $t'$ can be computed from $\{f', t, x\}$ by empirically derived prediction equations of ACT, and represents the temporal dynamics of f encoding both the stability of affective identities and the predictive dynamics of affective behaviours. $\xi$ is such that: (1) $f_{b}' = b_{a}$ if the agent is acting, and unconstrained if otherwise; (2) $f_{a}'$ and $f_{c}'$ are likely to be close to $f_{a}$, $f_{c}$, respectively.
 
 --- $Pr(x'|x,f',t',a)$ is defined to denote how the application progresses given the previous state, the fundamental and transient sentiments, and the (propositional) action of the agent. 
 
