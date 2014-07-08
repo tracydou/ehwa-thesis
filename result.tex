@@ -1,2 +1,71 @@
 \chapter{Experimental Results}
 \label{chap:result}
+
+Defined at the end of the Chapter~\ref{chap:intro}, the four objectives of this thesis are to augment the COACH system with an emotional reasoning engine based on BayesACT so that the augmented system: (1) is designed in a portable and extensible way; (2) runs in real-time from the perspective of the user group; (3) provides at least a level of functional assistance of as high quality as the COACH; (4) is able to tune the prompts in some way according to the emotional state of a user. It has been showed in the Chapter~\ref{chap:design} and Chapter~\ref{chap:impl} that the system we developed is easy to be extended. Experiments conducted on the system show that an average latency of 46.79ms is caused by the Observer component of the system, 0.009ms by the Buffer, and 1.65s by the Updater. The overall average latency of the system is around 1.70s, which means that the system runs in real-time from the perspective of its user group. 
+
+We demonstrate in this section by laboratory based tests that the system is also able to provide a level of functional assistance and to produce system prompts that have encoded to some extent the emotional state of the user. The tests were conducted on a PC running 64-bit Ubuntu 12.04 LTS, with AMD FX(tm)-6300 Six-Core Processor × 6 and NVIDIA GeForce GTX 650 Ti Graphics Card. A kinect camera was mounted above the sink area and was the only sensor of the system.
+
+\section{Parameter Setup}
+This paragraph explains how the values of threshold variables $distance$ and $difference$ used in the EPA-Calculator were assigned based on statistical results obtained from experiments as follows. Videos were recorded while a person washed her hands with different emotions in nine complete hand-washing trials. A total number of 13703 frames were extracted from the videos. For each frame, the distances between the person's two hands were computed. For each pair of neighbouring frames, the distances that the person's hands moved between the frames were calculated as well. Histograms of the two ``distances'' are shown in figure 4-6 \textcolor{red}{TODO: modify this}. Note that in around 69\% of the frames, the distances between the user's hands falls into the range of $(8, 40]$. Note also that in around 70\% of frames, the distances the user's hands have moved from their positions in the last frames falls into the range of $(3.5, 17.5]$. Based on analysis of the the distributions of the two ``distances'', we assigned the values of variables used in the EPA-Calculator as following: $distance = \{-\infty, 0, 8, 40, 128, 160, +\infty\}$, $potency = \{-4.3, -4.3, 0, 1, 2, 4.3, 4.3\}$, $difference = \{-\infty, 0, 3.5, 17.5, 35, 70, +\infty\}$, and $activity = \{-4.3, -4.3, -2, -1, 0, 4.3, 4.3\}$. Table~\ref{table:param-setting} shows an overview of the values assigned to important variables in our tests of the system. 
+
+%
+% TODO: insert figure 4-6 here
+
+%
+% table: Parameter values used in laboratory experiments
+\begin{table}
+\centering
+\caption{Parameter values used in laboratory experiments}
+\label{table:param-setting}
+\begin{tabular}{| l | l | l |}
+\hline
+\textbf{Param.} & \textbf{Value} & \textbf{Defined in which component} \\ \hline
+$n$ & $10$ & EPA-Calc \\ \hline
+$distance$ & $\{-\infty, 0, 8, 40, 128, 160, +\infty\}$ & EPA-Calc \\ \hline
+$potency$ & $\{-4.3, -4.3, 0, 1, 2, 4.3, 4.3\}$ & EPA-Calc \\ \hline 
+$difference$ & $\{-\infty, 0, 3.5, 17.5, 35, 70, +\infty\}$ & EPA-Calc \\ \hline
+$activity$ & $\{-4.3, -4.3, -2, -1, 0, 4.3, 4.3\}$ & EPA-Calc \\ \hline
+$alpha$ & $0$ & Buffer \\ \hline
+$timeout$ & $300$ & Buffer \\ \hline
+$timeup$ & $1$ & Buffer \\ \hline
+$\beta_{a}^{0}$ & $0.001$ & Updater \\ \hline
+$\beta_{c}^{0}$ & $2.0$ & Updater \\ \hline
+$\gamma$ & $(100000, 1.0, 0.5)$ & Updater \\ \hline
+$N$ & $2000$ & Updater \\ \hline
+$f\_a^{0}$ & $[1.5, 0.51, 0.45]$ & Updater \\ \hline
+$f\_c^{0}$ & Different in each test &Updater \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Overview of Two Laboratory Tests}
+
+%
+% Table: results of test #1
+
+\begin{table}
+\centering
+\caption{State changes in test \#1 of the system}
+\label{table:result-1}
+\begin{tabular}{| l | p{2.8cm} | p{1.8cm} | p{1.8cm} | p{1.8cm} | p{1.8cm} | p{3cm} |}
+\hline
+
+Time &
+User Behaviour (screenshot) &
+Behaviour: prop./epa &
+Planstep Belief &
+f\_c &
+Prompt: prop./epa &
+Avatar (screenshot) \\ \hline
+
+t1 &
+\raisebox{-\totalheight}{\includegraphics[width=2.8cm]{fig/system/_fast2-towel1_.jpg}} &
+\parbox[t]{1.8cm}{TOWEL $[0,\\ 1.86,\\ -1.7]$} &
+\parbox[t]{1.8cm}{$[1.00, 0.00,\\ 0.00, 0.00,\\ 0.00, 0.00,\\ 0.00, 0.00]$\\ most likely\\ planstep = $0$ }&
+$[1.7, 1.41, -1.39]$ &
+``turn on water'' $[1.82, 0.22, 0.47]$ &
+fig \\ \hline
+
+\end{tabular}
+\end{table}
+
+
