@@ -127,7 +127,7 @@ Definitions of request and response messages should be shared between the two co
 
 \begin{verbatim}
 message HandTrackerRequest {
-  optional int32 timestamp =  1 [default = -1]; // -1 means this field is not used
+  optional int32 timestamp = 1 [default = -1]; // -1 means this field is not used
 }
 
 message HandTrackerResponse {
@@ -159,16 +159,16 @@ The set of pre-generated and rated video prompts in Malhotra's survey \cite{malh
 %figure: Screenshots of two video prompts stating same propositional messages
 \begin{figure}[p]
 \centering
-\includegraphics[width=0.45\linewidth]{fig/prompt1.png}
-\includegraphics[width=0.45\linewidth]{fig/prompt2.png}
+\includegraphics[width=0.45\linewidth]{fig/prompt1.jpg}
+\includegraphics[width=0.45\linewidth]{fig/prompt2.jpg}
 \caption{Screenshots of two video prompts stating same propositional messages}
 \label{fig:sample-prompt}
 \end{figure}
 
 Each of the prompts in the dataset of the Prompt Selector has two labels: one states the propositional content of the prompt while the other one describes it emotionally. The propositional labels are assigned according to the intent of the prompts and are represented by integers. The mappings from ``intent of prompts'' to ``propositional labels'' are stated in Table~\ref{table:prompt-number-def}. The emotional labels, on the other hand, are defined as the EPA values participants rated in the survey. For example, the prompt from which the first screenshot is labelled as $[1.56, 1.17, 1.35]$ for its emotional annotation.
 
-Given the propositional and emotional descriptions of desired prompts (obtained from the BayesAct server component), the Prompt Selector is able to select the most proper prompts in the dataset via a distance-based method. To illustrate how the selector works, we first define the distance between two vectors of EPA values as the weighted Euclidean distance between them:
-$distance((E_1, P_1, A_1), (E_2, P_2, A_2))=\sqrt{(w_E(E_1-E_2))^2+(w_P(P_1-P_2))^2+(wA(A1-A2))^2}$,
+Given the propositional and emotional descriptions of desired prompts (obtained from the BayesAct server component), the Prompt Selector is able to select the most proper prompts in the dataset via a distance-based method. To illustrate how the selector works, we first define the distance between two vectors of EPA values as the weighted Euclidean distance between them: 
+$distance((E_1, P_1, A_1), (E_2, P_2, A_2)) \\ = \sqrt{(w_E(E_1-E_2))^2+(w_P(P_1-P_2))^2+(wA(A1-A2))^2}$,
 where $w_E$, $w_P$ and $w_A$ are weights for the three dimensions respectively. We then define the emotional distance between two prompts as the distance between their emotional annotations, i.e. the EPA values assigned to them. When given the propositional and emotional descriptions of the desired prompt, the selector selects out the video prompt that simultaneously has the same propositional label as and the minimal emotional distance to that desired prompt. In our implementation, the weights $w_E$, $w_P$ and $w_A$ are assigned values \{1, 1, 1\}; other values and even other definitions of the distances can be tried out in future improvements.
 
 After the proper prompt is selected, a Prompt Player is used to display the video prompt. The Prompt Player was implemented using libVLC (VLC SDK), a mature and easy-to-use media framework that can be embedded into systems to provide multimedia capabilities for the applications.
