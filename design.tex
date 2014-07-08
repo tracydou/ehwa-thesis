@@ -11,9 +11,9 @@ This chapter illustrates how our system is designed as an integration of indepen
 
 \section{Analysis}
 
-\begin{figure}[p]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=\linewidth]{fig-components.pdf}
+\includegraphics[width=0.9\linewidth]{fig-components.pdf}
 \caption{Functionality analysis on the system}
 \label{fig:components}
 \end{figure}
@@ -26,9 +26,9 @@ Planstep is used to denote the user's functional state and emotion for his/her e
 
 Planstep denotes the functional state of a user (i.e. how much has he/she accomplished) during the handwashing task. A set of subtasks of handwashing are defined, and each planstep is a combination of the completeness of these subtasks. For each timestep, the system checks if particular behaviours have been performed and updates planstep beliefs if particular subtasks are accomplished. A general definition of subtasks involved in a handwashing process uses three indicators: whether the water is on (on/off), the soap is on user's hand (dirty/soapy/clean), and the user's hands are wet (dry/wet). The corresponding planstep update diagram of this definition is shown in Figure~\ref{fig:planstep}.
 
-\begin{figure}[p]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=\linewidth]{fig-planstep.pdf}
+\includegraphics[width=0.9\linewidth]{fig-planstep.pdf}
 \caption{A planstep update diagram. Integers 0 to 7 denote the eight plansteps this subtask partition defines, which are (0) ``off/dirty/dry'', (1) ``on/dirty/dry'', (2) ``off/soapy/dry'', (3) ``on/soapy/dry'', (4) ``on/clean/wet'', (5) ``off/clean/wet'', (6) ``on/clean/dry'', (7) ``off/clean/dry'', respectively. A1 to A5 represent five behaviours completing the subtasks. A1 to A5 are ``turn on water'', ``put on soap'', ``rinse hands'', ``turn off water'', and ``use towel'', respectively.}
 \label{fig:planstep}
 \end{figure}
@@ -69,9 +69,9 @@ The Observer perceives the world by sensors and extracts information required by
 
 To obtain the hands locations and the user's hands movement, a 4D (RGBD) camera is mounted above the sink area to grab images for later analysis. A 4D camera is better than a normal camera in the sense that it is able to get depth information of objects as well. With this additional information provided, image analyzers are able to achieve more accurate results. In fact, it would be difficult for the analyzers to differentiate the vertical distances between the user's hands and certain objects without depth information, in which case the user would be detected as ``using the soap'' whenever his/her hands and the soap are projected at the same place on the x-y plane (regardless of what the z values are). 
 
-\begin{figure}[p]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=\linewidth]{fig-location-use.pdf}
+\includegraphics[width=0.9\linewidth]{fig-location-use.pdf}
 \caption{How the location info of hands and other objects are used in the system}
 \label{fig:location-use}
 \end{figure}
@@ -104,9 +104,9 @@ This thesis uses the set of audio-visual prompts generated and evaluated in Malh
 
 Some of the components illustrated in Figure~\ref{fig:components} are implemented from scratch, while others are extended from existing open source packages. Depending on how the existing open source packages are implemented, they utilize different techniques (e.g. developed using different languages) and work differently (e.g. run as an independent thread v.s. serving as an API or component). If an open source package is used in our system implementation, it is used as what it is (of course, with some interface wrappers if necessary), which means that it has not been rewritten in languages different from their original implementations, or been rewritten into APIs. There are several reasons for this. Firstly, the original implementations are usually stable. These widely distributed open source packages have already been tested by the developers who developed them and a large amount of users who used them. Secondly, it is easier to extend or maintain the handwashing system by using the open source packages as what they are. In this way, one can easily update the system by replacing the plug-ins to newer versions (possibly with some changes to the interfaces), whenever bugs are found and fixed in the packages, better performance is achieved by newer implementations of the packages, or more suitable packages are found. Thirdly, it saves time and effort to use the packages as what they are. To sum up, using existing packages as what they are is safe, easy to maintain, extend and switch to other packages if needed, and effort-saving.
 
-\begin{figure}[p]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=\linewidth]{fig-communication.pdf}
+\includegraphics[width=0.9\linewidth]{fig-communication.pdf}
 \caption{Communication between components using server-client model}
 \label{fig:communication}
 \end{figure}
@@ -122,9 +122,9 @@ This section explains the design details of the system components in the same or
 
 The two updaters together decide the functionalities of the Observer and they two together form the functionality center of the hand-washing system. Logically, they both update belief states of the system at each timestep, and compute prompt descriptions based on the beliefs. From an engineering perspective, the two can be combined and developed as a single reasoning engine. In fact, in our approach, the two updaters are implemented based upon the BayesACT model. BayesACT enables machines to generate affectively believable interactions with people by learning about their identity, predicting their behaviours, and taking actions that are simultaneously goal-directed and affect-sensitive. Readers are referred to the Background chapter of this thesis for more conceptual introductions to ACT and BayesACT. Figure~\ref{fig:updater} shows how this thesis designs the Planstep and Emotion Updater as a single reasoning engine based on the existing BayesAct program (implemented in \cite{hoey2013bayesian}).
 
-\begin{figure}[p]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=\linewidth]{fig-updater.pdf}
+\includegraphics[width=0.9\linewidth]{fig-updater.pdf}
 \caption{Design the Planstep and Emotion Updaters basing on the BayesAct code}
 \label{fig:updater}
 \end{figure}
@@ -161,9 +161,9 @@ After a most proper prompt is chosen, the Output Part displays it out to the use
 
 \subsection{Communication between components}
 
-\begin{figure}[p]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=\linewidth]{fig-dataflow.pdf}
+\includegraphics[width=0.9\linewidth]{fig-dataflow.pdf}
 \caption{Data Flow and Logical Relationship between Components}
 \label{fig:dataflow}
 \end{figure}
@@ -176,18 +176,18 @@ The timings of the client requests and the server replies should be carefully de
 
 The following three aspects should be carefully designed for the buffer: (1) the conditions which would trigger the buffer to transfer between states; (2) the buffer's size, i.e. the information processed for how many frames can be handled by the buffer; (3) the policy describing how overflowed messages are dealt with. The state machine shown in Figure~\ref{fig:state-trans} illustrates how the buffer is designed in this thesis. As shown in the figure, there are three states of the buffer. State A represents the state where the user performs a same user behaviour within neighbouring frames. Two conditions can trigger the buffer's state to transfer from State A to another state: (1) If an user behaviour different from the current stable behaviour is detected, then the state of the buffer would transfer to State B. If the new behaviour is found to last for less than a \textit{timeup} period, the state of the buffer would change back to State A, with the stable behaviour unchanged. (2) If the buffer has been in State A for a \textit{timeout} period, then the buffer would change to State C, where the state of the buffer would change back to State A immediately after messages encoding the current stable user behaviour are sent to the updaters. State B of the buffer checks if a newly detected user behaviour is a stable one. Similarly, there are two conditions that can trigger the buffer's state to transfer from State B to another state: (1) If the new user behaviour different from the current stable behaviour is found to last for at least a \textit{timeup} period, then the new user behaviour is considered stable. In that case, the state of the buffer would change to State C, where the buffer's state would change to State A immediately after messages encoding this new stable behaviour are sent to the updaters. (2) Otherwise, the buffer's state would change back to State A with the current stable user behaviour non-changed.
 
-\begin{figure}[p]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=\linewidth]{fig-state-trans.pdf}
+\includegraphics[width=0.9\linewidth]{fig-state-trans.pdf}
 \caption{State transitions of the buffer between the Observer and the Updater}
 \label{fig:state-trans}
 \end{figure}
 
 \subsection{Summary}
 
-\begin{figure}[p]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=\linewidth]{fig-system.pdf}
+\includegraphics[width=0.9\linewidth]{fig-system.pdf}
 \caption{System Design with Server-Client Models}
 \label{fig:system}
 \end{figure}

@@ -42,29 +42,11 @@ $f\_c^{0}$ & Different in each test &Updater \\ \hline
 %
 % Table: results of test #1
 
-\begin{center}
-\begin{longtable}{| V{0.8cm} | V{2.6cm} | V{1.7cm} | V{2.1cm} | V{1.45cm} | V{1.6cm} | V{3.2cm} |}
+\begin{longtable}{| V{0.8cm} | V{2.6cm} | V{1.6cm} | V{2.1cm} | V{1.55cm} | V{1.6cm} | V{3.2cm} |}
 \caption{State changes in test \#1 of the system}
 \label{table:result-1}
 
-
-
-\hline \multicolumn{1}{|c|}{\textbf{Time (s)}} & \multicolumn{1}{c|}{\textbf{Triple chosen}} & \multicolumn{1}{c|}{\textbf{Other feasible triples}} \\ \hline 
-\endfirsthead
-
-\multicolumn{3}{c}%
-{{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\
-\hline \multicolumn{1}{|c|}{\textbf{Time (s)}} &
-\multicolumn{1}{c|}{\textbf{Triple chosen}} &
-\multicolumn{1}{c|}{\textbf{Other feasible triples}} \\ \hline 
-\endhead
-
-\hline \multicolumn{3}{|r|}{{Continued on next page}} \\ \hline
-\endfoot
-
-\hline \hline
-\endlastfoot
-
+\\ \hline
 
 Time &
 User Behav. (screenshot) &
@@ -73,25 +55,25 @@ Planstep Belief &
 $f\_c$ &
 Prompt: prop./epa &
 Avatar (screenshot) \\ \hline
-
+\endfirsthead
 
 %column-1
 t1 &
 %column-2
-\vskip 0.15cm
 \includegraphics[width=\linewidth]{fig/system/_fast2-towel1_.jpg} &
 %column-3
 TOWEL
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0 \\
 1.86 \\
 -1.7
 \end{bmatrix}$ &
 %column-4
-\begin{minipage}[c]{\linewidth} \centering
+%\begin{minipage}[c]{\linewidth} \centering
 [1.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] most likely planstep=0
-\end{minipage} &
+&
+%\end{minipage} &
 %column-5
 $\begin{bmatrix}
 1.7 \\
@@ -100,15 +82,15 @@ $\begin{bmatrix}
 \end{bmatrix}$ &
 %column-6
 ``turn on water''
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 1.82 \\
 0.22 \\
 0.47
 \end{bmatrix}$ &
 %column-7
-\vskip 0.15cm
 \includegraphics[width=2.6cm]{fig/prompt/_please-turn-on-the-water_.jpg}
+\linebreak
 \footnotesize
 ``Hello I am so glad to have you here. Please turn on the water.''
 \\ \hline
@@ -117,20 +99,17 @@ $\begin{bmatrix}
 %column-1
 t2 &
 %column-2
-\vskip 0.15cm
 \includegraphics[width=\linewidth]{fig/system/_fast2-tap1_.jpg} &
 %column-3
 TAP
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0 \\
 1.68 \\
 -0.58
 \end{bmatrix}$ &
 %column-4
-\begin{minipage}[c]{\linewidth} \centering
-[0.26, 0.74, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] most likely planstep=1
-\end{minipage} &
+[0.26, 0.74, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] most likely planstep=1 &
 %column-5
 $\begin{bmatrix}
 2.73 \\
@@ -147,20 +126,17 @@ No Prompt
 %column-1
 t3 &
 %column-2
-\vskip 0.15cm
 \includegraphics[width=\linewidth]{fig/system/_fast2-rinse1_.jpg} &
 %column-3
 RINSE
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0 \\
 1.49 \\
 -0.16
 \end{bmatrix}$ &
 %column-4
-\begin{minipage}[c]{\linewidth} \centering
-[0.27, 0.73, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] most likely planstep=1
-\end{minipage} &
+[0.27, 0.73, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] most likely planstep=1 &
 %column-5
 $\begin{bmatrix}
 2.67 \\
@@ -168,16 +144,16 @@ $\begin{bmatrix}
 -0.72
 \end{bmatrix}$ &
 %column-6
-``"use some soap''
-\vskip 0.2cm
+``use some soap''
+\linebreak\linebreak
 $\begin{bmatrix}
 1.51 \\
 0.12 \\
 0.52
 \end{bmatrix}$ &
 %column-7
-\vskip 0.15cm
 \includegraphics[width=2.6cm]{fig/prompt/_please-use-the-soap_.jpg}
+\linebreak
 \footnotesize
 ``You are washing your hands. Please use the soap.''
 \\ \hline
@@ -186,20 +162,17 @@ $\begin{bmatrix}
 %column-1
 t4 &
 %column-2
-\vskip 0.15cm
 \includegraphics[width=\linewidth]{fig/system/_fast2-soap_.jpg} &
 %column-3
 SOAP
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0 \\
 0.73 \\
 -1.52
 \end{bmatrix}$ &
 %column-4
-\begin{minipage}[c]{\linewidth} \centering
-[0.00, 0.01, 0.35, 0.64, 0.00, 0.00, 0.00, 0.00] most likely planstep = 3
-\end{minipage} &
+[0.00, 0.01, 0.35, 0.64, 0.00, 0.00, 0.00, 0.00] most likely planstep=3 &
 %column-5
 $\begin{bmatrix}
 2.57 \\
@@ -216,20 +189,17 @@ No Prompt
 %column-1
 t5 &
 %column-2
-\vskip 0.15cm
 \includegraphics[width=\linewidth]{fig/system/_fast2-rinse_.jpg} &
 %column-3
 RINSE
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0 \\
 0.23 \\
 -1.87
 \end{bmatrix}$ &
 %column-4
-\begin{minipage}[c]{\linewidth} \centering
-[0.00, 0.00, 0.01, 0.02, 0.97, 0.00, 0.00, 0.00] most likely planstep = 4
-\end{minipage} &
+[0.00, 0.00, 0.01, 0.02, 0.97, 0.00, 0.00, 0.00] most likely planstep=4 &
 %column-5
 $\begin{bmatrix}
 2.92 \\
@@ -246,20 +216,17 @@ No Prompt
 %column-1
 t6 &
 %column-2
-\vskip 0.15cm
 \includegraphics[width=\linewidth]{fig/system/_fast2-tap2_.jpg} &
 %column-3
 TAP
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0 \\
 1.79 \\
 -1.84
 \end{bmatrix}$ &
 %column-4
-\begin{minipage}[c]{\linewidth} \centering
-[0.00, 0.00, 0.00, 0.00, 0.18, 0.00, 0.82, 0.00] most likely planstep = 6
-\end{minipage} &
+[0.00, 0.00, 0.00, 0.00, 0.18, 0.00, 0.82, 0.00] most likely planstep=6 &
 %column-5
 $\begin{bmatrix}
 3.21 \\
@@ -276,20 +243,17 @@ No Prompt
 %column-1
 t7 &
 %column-2
-\vskip 0.15cm
 \includegraphics[width=\linewidth]{fig/system/_fast2-rinse3_.jpg} &
 %column-3
 RINSE
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0 \\
 1.69 \\
 -1.6
 \end{bmatrix}$ &
 %column-4
-\begin{minipage}[c]{\linewidth} \centering
-[0.00, 0.00, 0.00, 0.00, 0.21, 0.00, 0.79, 0.00] most likely planstep = 6
-\end{minipage} &
+[0.00, 0.00, 0.00, 0.00, 0.21, 0.00, 0.79, 0.00] most likely planstep=6 &
 %column-5
 $\begin{bmatrix}
 3.27 \\
@@ -298,15 +262,15 @@ $\begin{bmatrix}
 \end{bmatrix}$ &
 %column-6
 ``use towel''
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 1.77 \\
 0.16 \\
 1
 \end{bmatrix}$ &
 %column-7
-\vskip 0.15cm
 \includegraphics[width=2.6cm]{fig/prompt/_can-i-get-your-hands-dried-up_.jpg}
+\linebreak
 \footnotesize
 ``Can I get your hands dried up?''
 \\ \hline
@@ -315,20 +279,17 @@ $\begin{bmatrix}
 %column-1
 t8 &
 %column-2
-\vskip 0.15cm
 \includegraphics[width=\linewidth]{fig/system/_fast2-towel2_.jpg} &
 %column-3
 TOWEL
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0 \\
 1.08 \\
 -1.16
 \end{bmatrix}$ &
 %column-4
-\begin{minipage}[c]{\linewidth} \centering
-[0.00, 0.00, 0.00, 0.00, 0.00, 0.14, 0.00, 0.86] most likely planstep = 7
-\end{minipage} &
+[0.00, 0.00, 0.00, 0.00, 0.00, 0.14, 0.00, 0.86] most likely planstep=7 &
 %column-5
 $\begin{bmatrix}
 3.31 \\
@@ -337,33 +298,31 @@ $\begin{bmatrix}
 \end{bmatrix}$ &
 %column-6
 ``all done''
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 1.55 \\
 0.38 \\
 0.87
 \end{bmatrix}$ &
 %column-7
-\vskip 0.15cm
 \includegraphics[width=2.6cm]{fig/prompt/_can-you-come-back-soon_.jpg}
+\linebreak
 \footnotesize
 ``Can you come back soon?''
 \\ \hline
 
 \end{longtable}
-\end{center}
 
 
 
 %
 % Table: results of test #2
 
-\begin{table}
-\centering
+\begin{longtable}{| V{0.8cm} | V{2.6cm} | V{1.6cm} | V{2.1cm} | V{1.55cm} | V{1.6cm} | V{3.2cm} |}
 \caption{State changes in test \#2 of the system}
 \label{table:result-2}
-\begin{tabular}{| V{0.8cm} | V{2.6cm} | V{1.7cm} | V{2.1cm} | V{1.45cm} | V{1.6cm} | V{3.2cm} |}
-\hline
+\\ \hline
+
 
 Time &
 User Behav. (screenshot) &
@@ -372,25 +331,22 @@ Planstep Belief &
 $f\_c$ &
 Prompt: prop./epa &
 Avatar (screenshot) \\ \hline
-
+\endfirsthead
 
 %column-1
 t1 &
 %column-2
-\vskip 0.15cm
 \includegraphics[width=\linewidth]{fig/system/_slow2-rinse1_.jpg} &
 %column-3
 RINSE
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0 \\
 0.29 \\
 -1.86
 \end{bmatrix}$ &
 %column-4
-\begin{minipage}[c]{\linewidth} \centering
-[1.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] most likely planstep = 0
-\end{minipage} &
+[1.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] most likely planstep=0 &
 %column-5
 $\begin{bmatrix}
 -0.87 \\
@@ -399,15 +355,15 @@ $\begin{bmatrix}
 \end{bmatrix}$ &
 %column-6
 ``turn on water''
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0.87 \\
 0.85 \\
 0.27
 \end{bmatrix}$ &
 %column-7
-\vskip 0.15cm
 \includegraphics[width=2.6cm]{fig/prompt/_i-want-you-to-turn-the-water-on_.jpg}
+\linebreak
 \footnotesize
 ``I want you to turn the water on.''
 \\ \hline
@@ -416,20 +372,17 @@ $\begin{bmatrix}
 %column-1
 t2 &
 %column-2
-\vskip 0.15cm
 \includegraphics[width=\linewidth]{fig/system/_fast2-tap1_.jpg} &
 %column-3
 TAP
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0 \\
 1.68 \\
 -0.58
 \end{bmatrix}$ &
 %column-4
-\begin{minipage}[c]{\linewidth} \centering
-[0.26, 0.74, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] most likely planstep=1
-\end{minipage} &
+[0.26, 0.74, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] most likely planstep=1 &
 %column-5
 $\begin{bmatrix}
 2.73 \\
@@ -446,20 +399,17 @@ No Prompt
 %column-1
 t3 &
 %column-2
-\vskip 0.15cm
 \includegraphics[width=\linewidth]{fig/system/_fast2-rinse1_.jpg} &
 %column-3
 RINSE
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0 \\
 1.49 \\
 -0.16
 \end{bmatrix}$ &
 %column-4
-\begin{minipage}[c]{\linewidth} \centering
-[0.27, 0.73, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] most likely planstep=1
-\end{minipage} &
+[0.27, 0.73, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] most likely planstep=1 &
 %column-5
 $\begin{bmatrix}
 2.67 \\
@@ -467,16 +417,16 @@ $\begin{bmatrix}
 -0.72
 \end{bmatrix}$ &
 %column-6
-``"use some soap''
-\vskip 0.2cm
+``use some soap''
+\linebreak\linebreak
 $\begin{bmatrix}
 1.51 \\
 0.12 \\
 0.52
 \end{bmatrix}$ &
 %column-7
-\vskip 0.15cm
 \includegraphics[width=2.6cm]{fig/prompt/_please-use-the-soap_.jpg}
+\linebreak
 \footnotesize
 ``You are washing your hands. Please use the soap.''
 \\ \hline
@@ -485,20 +435,17 @@ $\begin{bmatrix}
 %column-1
 t4 &
 %column-2
-\vskip 0.15cm
 \includegraphics[width=\linewidth]{fig/system/_fast2-soap_.jpg} &
 %column-3
 SOAP
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0 \\
 0.73 \\
 -1.52
 \end{bmatrix}$ &
 %column-4
-\begin{minipage}[c]{\linewidth} \centering
-[0.00, 0.01, 0.35, 0.64, 0.00, 0.00, 0.00, 0.00] most likely planstep = 3
-\end{minipage} &
+[0.00, 0.01, 0.35, 0.64, 0.00, 0.00, 0.00, 0.00] most likely planstep=3 &
 %column-5
 $\begin{bmatrix}
 2.57 \\
@@ -515,20 +462,17 @@ No Prompt
 %column-1
 t5 &
 %column-2
-\vskip 0.15cm
 \includegraphics[width=\linewidth]{fig/system/_fast2-rinse_.jpg} &
 %column-3
 RINSE
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0 \\
 0.23 \\
 -1.87
 \end{bmatrix}$ &
 %column-4
-\begin{minipage}[c]{\linewidth} \centering
-[0.00, 0.00, 0.01, 0.02, 0.97, 0.00, 0.00, 0.00] most likely planstep = 4
-\end{minipage} &
+[0.00, 0.00, 0.01, 0.02, 0.97, 0.00, 0.00, 0.00] most likely planstep=4 &
 %column-5
 $\begin{bmatrix}
 2.92 \\
@@ -545,20 +489,17 @@ No Prompt
 %column-1
 t6 &
 %column-2
-\vskip 0.15cm
 \includegraphics[width=\linewidth]{fig/system/_fast2-tap2_.jpg} &
 %column-3
 TAP
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0 \\
 1.79 \\
 -1.84
 \end{bmatrix}$ &
 %column-4
-\begin{minipage}[c]{\linewidth} \centering
-[0.00, 0.00, 0.00, 0.00, 0.18, 0.00, 0.82, 0.00] most likely planstep = 6
-\end{minipage} &
+[0.00, 0.00, 0.00, 0.00, 0.18, 0.00, 0.82, 0.00] most likely planstep=6 &
 %column-5
 $\begin{bmatrix}
 3.21 \\
@@ -575,20 +516,17 @@ No Prompt
 %column-1
 t7 &
 %column-2
-\vskip 0.15cm
 \includegraphics[width=\linewidth]{fig/system/_fast2-rinse3_.jpg} &
 %column-3
 RINSE
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0 \\
 1.69 \\
 -1.6
 \end{bmatrix}$ &
 %column-4
-\begin{minipage}[c]{\linewidth} \centering
-[0.00, 0.00, 0.00, 0.00, 0.21, 0.00, 0.79, 0.00] most likely planstep = 6
-\end{minipage} &
+[0.00, 0.00, 0.00, 0.00, 0.21, 0.00, 0.79, 0.00] most likely planstep=6 &
 %column-5
 $\begin{bmatrix}
 3.27 \\
@@ -597,15 +535,15 @@ $\begin{bmatrix}
 \end{bmatrix}$ &
 %column-6
 ``use towel''
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 1.77 \\
 0.16 \\
 1
 \end{bmatrix}$ &
 %column-7
-\vskip 0.15cm
 \includegraphics[width=2.6cm]{fig/prompt/_can-i-get-your-hands-dried-up_.jpg}
+\linebreak
 \footnotesize
 ``Can I get your hands dried up?''
 \\ \hline
@@ -614,20 +552,17 @@ $\begin{bmatrix}
 %column-1
 t8 &
 %column-2
-\vskip 0.15cm
 \includegraphics[width=\linewidth]{fig/system/_fast2-towel2_.jpg} &
 %column-3
 TOWEL
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 0 \\
 1.08 \\
 -1.16
 \end{bmatrix}$ &
 %column-4
-\begin{minipage}[c]{\linewidth} \centering
-[0.00, 0.00, 0.00, 0.00, 0.00, 0.14, 0.00, 0.86] most likely planstep = 7
-\end{minipage} &
+[0.00, 0.00, 0.00, 0.00, 0.00, 0.14, 0.00, 0.86] most likely planstep=7 &
 %column-5
 $\begin{bmatrix}
 3.31 \\
@@ -636,20 +571,19 @@ $\begin{bmatrix}
 \end{bmatrix}$ &
 %column-6
 ``all done''
-\vskip 0.2cm
+\linebreak\linebreak
 $\begin{bmatrix}
 1.55 \\
 0.38 \\
 0.87
 \end{bmatrix}$ &
 %column-7
-\vskip 0.15cm
 \includegraphics[width=2.6cm]{fig/prompt/_can-you-come-back-soon_.jpg}
+\linebreak
 \footnotesize
 ``Can you come back soon?''
 \\ \hline
 
-\end{tabular}
-\end{table}
+\end{longtable}
 
 
