@@ -1,4 +1,39 @@
+
 \chapter{Detailed Test Results}
 
-This chapter shows detailed state changes of the 17 tests conducted on the system in the following table. In the tables, the column ``run\#'' corresponds to the column ``number'' in Table~\ref{table:compare-epa-all}. That is to say, the details of the test with ``number = k'' in Table~\ref{table:compare-epa-all} are shown in the table with ``run\# = k'' in this chapter. The column ``time'' in the table indicate timesteps in the Planstep and Emotion Updater, where ``time = 0'' means at the time of initialization. The column ``behav-prop.'' in the tables use the definition of behaviours shown in column ``Representation Number used in the Updater'' in Table~\ref{table:area-action}, and the column of ``ps\_beliefs'' uses the definition of plansteps shown Table~\ref{table:heuristic-policy}. Finally, the columns ``prompt-prop.'' in the table uses the definition of prompts shown in column ``Representation number in Prompt-Selector'' in Table~\ref{table:prompt-number-def}. If ``prompt-epa = 0'', then it means that there was no actual prompt displayed at that timestep. No matter whether a prompt was displayed or not at a timestep, the value of ``prompt-epa'' at that timestep was produced by the updater based on the belief states at that time, and thus is included in calculating the mean of prompt-epa's for that run. For all these tests, the parameter settings as shown in Table~\ref{table:param-setting} were used.
+This chapter shows detailed state changes of the 17 tests conducted on the system. The details of the test with ``number = k'' in Table~\ref{table:compare-epa-all} are shown in the table with caption ``experiment results of run k'' in this chapter. The columns ``time'' in the tables indicate timesteps in the Planstep and Emotion Updater, where ``time = 0'' means at the time of initialization. The columns ``behav-prop.'' in the tables use the definition of behaviours shown in column ``Representation Number used in the Updater'' in Table~\ref{table:area-action}, and the columns of ``ps\_beliefs'' use the definition of plansteps shown in Table~\ref{table:heuristic-policy}. Finally, the columns ``prompt-prop.'' in the tables use the definition of prompts shown in column ``Representation number in Prompt-Selector'' in Table~\ref{table:prompt-number-def}. If ``prompt-epa = 0'', then it means that there was no actual prompt displayed at that timestep. No matter whether a prompt was displayed or not at a timestep, the value of ``prompt-epa'' at that timestep was produced by the updater based on the belief states at that time, and thus is included in calculating the mean of prompt-epa's for that run. For all these tests, the parameter settings as shown in Table~\ref{table:param-setting} were used.
+
+
+%% -----------------------------------------------------------------------
+%% The following tables are generated half-automatically from calc files
+%% -----------------------------------------------------------------------
+
+\begin{table}[htbp]\footnotesize
+\caption{experiment results of run 1}
+\begin{center}
+\begin{tabular}{|p{0.4cm}|p{0.6cm}|l|p{0.6cm}|p{3.3cm}|l|p{0.6cm}|l|}
+\hline
+
+%headers
+\multirow{2}{*}{time} & \multicolumn{2}{c|}{user behav.} & \multicolumn{2}{c|}{ps\_belief} &
+\multirow{2}{*}{$f\_c$} & \multicolumn{2}{c|}{prompt} \\ \cline{2-5}\cline{ 7- 8}
+& prop. & epa & value & probability distribution &  & prop. & epa \\ \hline
+
+%main body
+0 & \multicolumn{ 1}{l|}{} &  & \multicolumn{1}{l|}{} &  & [1.59, 0.83, -0.87] & \multicolumn{ 1}{l|}{} &  \\ \hline
+1 & 4 & [0, 3.71, -0.84] & 0 & [1.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] & [1.51, 1.96, -1.14] & 1 & [1.84, 0.55, 0.41] \\ \hline
+2 & 2 & [0, 0.84, -0.34] & 1 & [0.27, 0.73, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] & [1.70, 0.92, -0.49] & 0 & [1.76, 0.62, 0.57] \\ \hline
+3 & 4 & [0, 1.59, -0.09] & 1 & [0.29, 0.71, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] & [1.74, 1.07, -0.48] & 2 & [1.77, 0.36, 0.39] \\ \hline
+4 & 1 & [0, 1.63, 1.78] & 3 & [0.00, 0.01, 0.11, 0.88, 0.00, 0.00, 0.00, 0.00] & [1.59, 0.99, -0.06] & 0 & [1.9, 0.47, 0.25] \\ \hline
+5 & 3 & [0, 1.02, -1.63] & 4 & [0.00, 0.00, 0.00, 0.01, 0.99, 0.00, 0.00, 0.00] & [1.57, 0.97, 0.05] & 0 & [1.94, 0.45, 0.35] \\ \hline
+6 & 2 & [0, 1.82, -1.47] & 6 & [0.00, 0.00, 0.00, 0.00, 0.26, 0.00, 0.74, 0.00] & [1.61, 0.97, 0.03] & 0 & [2.05, 0.45, 0.56] \\ \hline
+7 & 4 & [0, 1.99, -1.57] & 7 & [0.00, 0.00, 0.00, 0.00, 0.00, 0.05, 0.01, 0.94] & [1.62, 1.00, 0.04] & 6 & [1.96, 0.95, 0.37] \\ \hline
+\multicolumn{1}{|l|}{average} & \multicolumn{1}{l|}{} & [0, 1.8, -0.59] & \multicolumn{1}{l|}{} &  & [1.62, 1.12, -0.29] & \multicolumn{1}{l|}{} & [1.89, 0.55, 0.41] \\ \hline
+\end{tabular}
+\end{center}
+\label{}
+\end{table}
+
+
+
 
