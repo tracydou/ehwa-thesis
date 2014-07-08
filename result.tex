@@ -10,10 +10,10 @@ This paragraph explains how the values of threshold variables $distance$ and $di
 
 %
 % figure:Histograms 
-\begin{figure}[ht]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=0.45\linewidth]{fig/histogram1.png}
-\includegraphics[width=0.45\linewidth]{fig/histogram2.png}
+\includegraphics[width=0.9\linewidth]{fig/histogram1.png}
+\includegraphics[width=0.9\linewidth]{fig/histogram2.png}
 \caption{Histograms}
 \label{fig:histogram}
 \end{figure}
@@ -40,15 +40,15 @@ $\beta_{a}^{0}$ & $0.001$ & Updater \\ \hline
 $\beta_{c}^{0}$ & $2.0$ & Updater \\ \hline
 $\gamma$ & $(100000, 1.0, 0.5)$ & Updater \\ \hline
 $N$ & $2000$ & Updater \\ \hline
-$f\_a^{0}$ & $[1.5, 0.51, 0.45]$ & Updater \\ \hline
-$f\_c^{0}$ & Different in each test &Updater \\ \hline
+$f_a^{0}$ & $[1.5, 0.51, 0.45]$ & Updater \\ \hline
+$f_c^{0}$ & Different in each test &Updater \\ \hline
 \end{tabular}
 \end{table}
 
 \section{Overview of Two Laboratory Tests}
 
 
-Tables~\ref{table:result-1} and ~\ref{table:result-2} show the state changes of the system in two laboratory tests. In both of these tests, an actor was washing her hands while the system observes and assists her in real time. The difference between the two was that the actor acted more powerfully (with her hands more ``open'') and more actively (with her hands moving more quickly) in the first test than in the second one. $f\_c^0$ was set to $[1.61, 0.84, -0.87]$ (i.e. close to the EPA value of an identity of ``elder'') in test \#1, and was set to $[-0.64, -0.43, -1.81]$ (i.e. close to the EPA value of an identity of a ``lonesome elder'') in test \#2. As for the data in the tables, except for columns ``times'' and ``user behaviour (screenshot)'', all data in the table were computed by the system. The column "Planstep Belief" uses the definition of plansteps shown in Table~\ref{table:heuristic-policy}. The video prompts displayed by the system during the tests are described in the table by screenshots and the avatar's lines. As shown in the tables, the Planstep and Emotion Updater (i.e. the BayesAct reasoning engine) updated its states for a total of 8 times in both test \#1 and test \#2. We explain using the tables in the remaining of this section that the system is able to work both functionally and emotionally by looking at the experimental results of the two tests more closely.
+Tables~\ref{table:result-1} and ~\ref{table:result-2} show the state changes of the system in two laboratory tests. In both of these tests, an actor was washing her hands while the system observes and assists her in real time. The difference between the two was that the actor acted more powerfully (with her hands more ``open'') and more actively (with her hands moving more quickly) in the first test than in the second one. $f_c^0$ was set to $[1.61, 0.84, -0.87]$ (i.e. close to the EPA value of an identity of ``elder'') in test \#1, and was set to $[-0.64, -0.43, -1.81]$ (i.e. close to the EPA value of an identity of a ``lonesome elder'') in test \#2. As for the data in the tables, except for columns ``times'' and ``user behaviour (screenshot)'', all data in the table were computed by the system. The column ``Planstep Belief'' uses the definition of plansteps shown in Table~\ref{table:heuristic-policy}. The video prompts displayed by the system during the tests are described in the table by screenshots and the avatar's lines. As shown in the tables, the Planstep and Emotion Updater (i.e. the BayesAct reasoning engine) updated its states for a total of 8 times in both test \#1 and test \#2. We explain using the tables in the remaining of this section that the system is able to work both functionally and emotionally by looking at the experimental results of the two tests more closely.
 
 %
 % Table: results of test #1
@@ -63,7 +63,7 @@ Time &
 User Behav. (screenshot) &
 Behav. prop./epa &
 Planstep Belief &
-$f\_c$ &
+$f_c$ &
 Prompt: prop./epa &
 Avatar (screenshot) \\ \hline
 \endfirsthead
@@ -339,7 +339,7 @@ Time &
 User Behav. (screenshot) &
 Behav. prop./epa &
 Planstep Belief &
-$f\_c$ &
+$f_c$ &
 Prompt: prop./epa &
 Avatar (screenshot) \\ \hline
 \endfirsthead
@@ -437,7 +437,7 @@ No Prompt
 %column-1
 t4 &
 %column-2
-\includegraphics[width=\linewidth]{fig/system/_slow2-rinse1_.jpg} &
+\includegraphics[width=\linewidth]{fig/system/_slow2-rinse2_.jpg} &
 %column-3
 RINSE
 \linebreak\linebreak
@@ -464,7 +464,7 @@ No Prompt
 %column-1
 t5 &
 %column-2
-\includegraphics[width=\linewidth]{fig/system/_slow2-rinse2_.jpg} &
+\includegraphics[width=\linewidth]{fig/system/_slow2-rinse2-2_.jpg} &
 %column-3
 RINSE
 \linebreak\linebreak
@@ -613,7 +613,7 @@ As shown in Tables~\ref{table:result-1} and ~\ref{table:result-2}, though the sy
 
 \section{Emotionality Performance of the System}
 
-To demonstrate that the system is able to work emotionally, this subsection compares the average of EPA values computed for user behaviours, for $f\_c$'s, and for system prompts in tests \#1 and \#2. Table~\ref{table:compare-epa-the-two} shows a simple comparison of the EPA values in the two aforementioned tests. 
+To demonstrate that the system is able to work emotionally, this subsection compares the average of EPA values computed for user behaviours, for $f_c$'s, and for system prompts in tests \#1 and \#2. Table~\ref{table:compare-epa-the-two} shows a simple comparison of the EPA values in the two aforementioned tests. 
 
 %
 % table: Comparison of EPA values in the two tests
@@ -623,7 +623,7 @@ To demonstrate that the system is able to work emotionally, this subsection comp
 \label{table:compare-epa-the-two}
 \begin{tabular}{|  p{0.5cm} | p{2.1cm} |  p{3.1cm} |  p{2.9cm} |  p{2.9cm} | p{2.3cm} |}
 \hline
-Test & mean of user behav. & init of f\_c & final of f\_c & mean of f\_c & mean of system prompt \\ \hline
+Test & mean of user behav. & init of $f_c$ & final of $f_c$ & mean of $f_c$ & mean of system prompt \\ \hline
 t1 & $[0,1.32,-1.3]$ & $[1.61,0.84,-0.87]$ & $[3.31,1.04,-0.57]$ & $[2.8,1.03,-0.73]$ & $[1.62,0.32,0.75]$ \\ \hline
 t2 & $[0,0.77,-1.74]$ & $[-0.64,-0.43,-1.81]$ & $[1.83,-0.45,-1.24]$ & $[1.13,-0.43,-1.47]$ & $[1.53,0.66,0.08]$ \\ \hline
 \end{tabular}
@@ -631,11 +631,11 @@ t2 & $[0,0.77,-1.74]$ & $[-0.64,-0.43,-1.81]$ & $[1.83,-0.45,-1.24]$ & $[1.13,-0
 
 As shown in Tables~\ref{table:result-1} and ~\ref{table:result-2}, throughout the tests, the user behaviours in the first test generally had larger $P$ and larger $A$ values than those in the second test. The $P$ and $A$ values computed for user behaviours in test \#1 reached an average of $[1.32, -1.3]$, while that in the second test was $[0.77, -1.74]$. This phenomenon accords well with how the actor acted in the two tests, which illustrates that the $P$ and $A$ values of user behaviours computed by the EPA-Calculator are reasonable.
 
-As also shown in Tables~\ref{table:result-1} and ~\ref{table:result-2}, throughout the tests, the $f\_c$'s in the first test generally had larger $P$ and larger $A$ values than those in the second test, and the system prompts in the first test generally had smaller $P$ and higher $A$ values. The mean of the EPA values of $f\_c$'s in the two tests were $[2.8, 1.03, -0.73]$ and $[1.13, -0.43, -1.47]$, respectively. And the mean of the EPA values of system prompts in the two tests were [1.62, 0.32, 0.75] and [1.53, 0.66, 0.08]. Note that prompts with lower $P$ values and higher $A$ values are produced for identities with higher $P$ values and higher $A$ values. This correlation makes sense since that people who think themselves as powerful persons tend to expect respect from others in interactions (i.e. prompts should be expressed to them with low potency levels), and that active people are likely to interact better with persons who are active as well. 
+As also shown in Tables~\ref{table:result-1} and ~\ref{table:result-2}, throughout the tests, the $f_c$'s in the first test generally had larger $P$ and larger $A$ values than those in the second test, and the system prompts in the first test generally had smaller $P$ and higher $A$ values. The mean of the EPA values of $f_c$'s in the two tests were $[2.8, 1.03, -0.73]$ and $[1.13, -0.43, -1.47]$, respectively. And the mean of the EPA values of system prompts in the two tests were [1.62, 0.32, 0.75] and [1.53, 0.66, 0.08]. Note that prompts with lower $P$ values and higher $A$ values are produced for identities with higher $P$ values and higher $A$ values. This correlation makes sense since that people who think themselves as powerful persons tend to expect respect from others in interactions (i.e. prompts should be expressed to them with low potency levels), and that active people are likely to interact better with persons who are active as well. 
 
-To check if this correlation between the $P$ and $A$ values of identities and system prompts is just a coincidence, a total of 17 tests (including the two described above) of the system were conducted. Among all the 17 tests, the actor performed more powerfully and more actively in 10 of them, and performed less powerfully and less actively in the other 7 runs. For all these tests, the parameter settings shown in Table~\ref{table:param-setting} were used. The initialization of $f\_c$'s and the means of EPA values for user behaviours, $f\_c$'s and system prompts are shown in Table~\ref{table:compare-epa-all}. The state change details of the 17 runs (including the two described above) are provided in the appendix of this thesis. For easier readings, data in Table~\ref{table:compare-epa-all} are sorted in descending order of the $A$ and $P$ values of the user behaviours. From the results shown in the table, we can see that comparing with the bottom rows, the top rows generally have:
+To check if this correlation between the $P$ and $A$ values of identities and system prompts is just a coincidence, a total of 17 tests (including the two described above) of the system were conducted. Among all the 17 tests, the actor performed more powerfully and more actively in 10 of them, and performed less powerfully and less actively in the other 7 runs. For all these tests, the parameter settings shown in Table~\ref{table:param-setting} were used. The initialization of $f_c$'s and the means of EPA values for user behaviours, $f_c$'s and system prompts are shown in Table~\ref{table:compare-epa-all}. The state change details of the 17 runs (including the two described above) are provided in the appendix of this thesis. For easier readings, data in Table~\ref{table:compare-epa-all} are sorted in descending order of the $A$ and $P$ values of the user behaviours. From the results shown in the table, we can see that comparing with the bottom rows, the top rows generally have:
 (1) larger (and larger) $P$ (and $A$) values for user behaviours, which accords well with how the actor acted in the tests;
-(2) larger (and larger) $P$ (and $A$) values for $f\_c$'s;
+(2) larger (and larger) $P$ (and $A$) values for $f_c$'s;
 (3) smaller (and larger) $P$ (and $A$) values for prompts, among which the differences between $A$ values are more obvious.
 
 %
@@ -646,7 +646,7 @@ To check if this correlation between the $P$ and $A$ values of identities and sy
 \label{table:compare-epa-all}
 \begin{tabular}{|  p{1.2cm} | p{2.6cm} |  p{3.5cm} |  p{3.4cm} |  p{3.0cm} |}
 \hline
-number & mean of user behaviour & init of $f\_c$ & mean of $f\_c$ & mean of system prompt \\ \hline
+number & mean of user behaviour & init of $f_c$ & mean of $f_c$ & mean of system prompt \\ \hline
 1 & $[0, 1.8, -0.59]$ & $[1.59, 0.83, -0.87]$ & $[1.62, 1.12, -0.29]$ & $[1.89, 0.55, 0.41]$ \\ \hline
 2 & $[0, 1.37, -0.68]$ & $[1.58, 0.81, -0.94]$ & $[2.3, 0.87, -0.45]$ & $[1.71, 0.44, 0.53]$ \\ \hline
 3 & $[0, 1.89, -0.81]$ & $[1.52, 0.85, -0.9]$ & $[1.51, 1.01, -1.28]$ & $[1.75, 0.3, 0.44]$ \\ \hline
@@ -667,4 +667,4 @@ number & mean of user behaviour & init of $f\_c$ & mean of $f\_c$ & mean of syst
 \end{tabular}
 \end{table}
 
-To sum up, test results showed that the system is able to compute reasonable $P$ and $A$ values for user behaviours, to update its beliefs of the user's identity based on behaviours performed by the user and itself, and to produce system prompts accordingly. The tests also indicated that user behaviours with higher $P$ and higher $A$ values may lead to $f\_c$ 's with higher $P$ and higher $A$ values and system prompts with lower $P$ and higher $A$ values.
+To sum up, test results showed that the system is able to compute reasonable $P$ and $A$ values for user behaviours, to update its beliefs of the user's identity based on behaviours performed by the user and itself, and to produce system prompts accordingly. The tests also indicated that user behaviours with higher $P$ and higher $A$ values may lead to $f_c$ 's with higher $P$ and higher $A$ values and system prompts with lower $P$ and higher $A$ values.
