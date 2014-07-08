@@ -1,2 +1,14 @@
-\chapter{Implementation and Experimental Results}
+\chapter{Implementation}
 \label{chap:impl}
+
+The system was implemented by developing new modules and combining both newly-developed components and existing packages together. Most of the codes were written in C/C++, while some of it used python. Server-stubs and client-stubs were employed, and Google's protocol buffer mechanism was used as the way to define the request and response messages shared by the two communicating parties. Open source libraries, such as ZeroMQ and libVLC, were utilized as well. Each module in the system was designed and implemented in an independent, efficient, and extensible way. The rest of this section describes the system implementation in detail.
+
+\section{The Planstep and Emotion Updater: a BayesACT reasoning engine}
+
+We implemented the Planstep- and Emotion- Updater on the basis of the BayesAct program developed by Hoey et al. \cite{hoey2013bayesian}. In their program, a BayesAct framework that models emotional state changes during human interactions was implemented. Based on the framework, this thesis implemented a subclass of class \textit{Agent} that simulates the actions of an automated assistant in a hand-washing scenario. The subclass is called \textit{Assistant}. Class \textit{Assistant} has an attribute field denoting the values of observed behaviours, and has methods that update planstep belief states based on observations. A function to get an estimation of the ``current most-likely planstep'' was defined in \textit{Assistant} as well. The function returns the planstep that has the highest probabilities in the planstep distribution. POMDP observation functions were also defined in \textit{Assistant}. 
+
+\section{The EPA-Calculator and the Buffer: computing and temporally smoothing EPA's}
+
+\section{The Observer: an extension to existing hand-tracker}
+
+\section{The Output Part: Prompt Selector and Player}
