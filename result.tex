@@ -10,10 +10,10 @@ This paragraph explains how the values of threshold variables $distance$ and $di
 
 %
 % figure:Histograms 
-\begin{figure}[htb]
+\begin{figure}[ht]
 \centering
-\includegraphics[width=0.9\linewidth]{fig/histogram1.png}
-\includegraphics[width=0.9\linewidth]{fig/histogram2.png}
+\includegraphics[width=0.45\linewidth]{fig/histogram1.png}
+\includegraphics[width=0.45\linewidth]{fig/histogram2.png}
 \caption{Histograms}
 \label{fig:histogram}
 \end{figure}
@@ -46,6 +46,9 @@ $f\_c^{0}$ & Different in each test &Updater \\ \hline
 \end{table}
 
 \section{Overview of Two Laboratory Tests}
+
+
+Tables~\ref{table:result-1} and ~\ref{table:result-2} show the state changes of the system in two laboratory tests. In both of these tests, an actor was washing her hands while the system observes and assists her in real time. The difference between the two was that the actor acted more powerfully (with her hands more ``open'') and more actively (with her hands moving more quickly) in the first test than in the second one. $f\_c^0$ was set to $[1.61, 0.84, -0.87]$ (i.e. close to the EPA value of an identity of ``elder'') in test \#1, and was set to $[-0.64, -0.43, -1.81]$ (i.e. close to the EPA value of an identity of a ``lonesome elder'') in test \#2. As for the data in the tables, except for columns ``times'' and ``user behaviour (screenshot)'', all data in the table were computed by the system. The column "Planstep Belief" uses the definition of plansteps shown in Table~\ref{table:heuristic-policy}. The video prompts displayed by the system during the tests are described in the table by screenshots and the avatar's lines. As shown in the tables, the Planstep and Emotion Updater (i.e. the BayesAct reasoning engine) updated its states for a total of 8 times in both test \#1 and test \#2. We explain using the tables in the remaining of this section that the system is able to work both functionally and emotionally by looking at the experimental results of the two tests more closely.
 
 %
 % Table: results of test #1
@@ -596,7 +599,6 @@ $\begin{bmatrix}
 \end{longtable}
 
 
-Tables~\ref{table:result-1} and ~\ref{table:result-2} show the state changes of the system in two laboratory tests. In both of these tests, an actor was washing her hands while the system observes and assists her in real time. The difference between the two was that the actor acted more powerfully (with her hands more ``open'') and more actively (with her hands moving more quickly) in the first test than in the second one. $f\_c^0$ was set to $[1.61, 0.84, -0.87]$ (i.e. close to the EPA value of an identity of ``elder'') in test \#1, and was set to $[-0.64, -0.43, -1.81]$ (i.e. close to the EPA value of an identity of a ``lonesome elder'') in test \#2. As for the data in the tables, except for columns ``times'' and ``user behaviour (screenshot)'', all data in the table were computed by the system. The column "Planstep Belief" uses the definition of plansteps shown in Table~\ref{table:heuristic-policy}. The video prompts displayed by the system during the tests are described in the table by screenshots and the avatar's lines. As shown in the tables, the Planstep and Emotion Updater (i.e. the BayesAct reasoning engine) updated its states for a total of 8 times in both test \#1 and test \#2. We explain using the tables in the remaining of this section that the system is able to work both functionally and emotionally by looking at the experimental results of the two tests more closely.
 
 \section{Functionality Performance of the System}
 
