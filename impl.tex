@@ -82,23 +82,37 @@ Definitions of request and response messages shared between the two communicatin
 Hands' coordinates obtained from the hand-tracker server are fed into an EPA-Calculator, which represents user behaviours as EPA values. In our prototypical approach, the \textit{Evaluation} of the user's behaviour in all situations are computed as a neutral value and is considered as an uninformative observation in the Emotion Updater. This is done through defining the observation function for the client behaviour sentiment $Pr(\Omega_b|f_b)$ (see subsection~\ref{subsec:design-singleengine}). To let the system neglect the $E$ value of the user's behaviour input to the Emotion Updater, we set $\gamma_e = +\infty$, where $\gamma_e$ is the attribute in $\gamma$ describing the ``confidence'' or ``reliability'' of the observation of \textit{Evaluation} of the user's behaviour. The \textit{Potency} and \textit{Activity} are computed in the EPA-Calculator based on the distances between the user's two hands within a same frame and the distances that the user's hands have moved between neighbouring frames, respectively. The $E$, $P$, and $A$ values computed for user behaviours in the EPA-Calculator are temporally smoothed in the Buffer before fed into the Planstep and Emotion Updater. The ``confidence'' of the $P$ and $A$ values computed can be expressed by setting different $\gamma$ values as well.
 
 A parameter $n$ is used to compute the $P$ and $A$ values of the user's behaviour. The average distance between the user's two hands in a set of $n$ neighbouring frames is scaled to the $P$ value of the user's behaviour in the EPA-Calculator. The average distance $Dist[i]$ of frames $i-n+1, i-n+2, ... , i$ can be computed using the following formula:
-$$Dist[i]=\dfrac{1}{n} \sum_{k=i-n+1}^{i}dist(positions[k,0],positions[k,1])$$
+\begin{equation}
+Dist[i]=\dfrac{1}{n} \sum_{k=i-n+1}^{i}dist(positions[k,0],positions[k,1])
+\end{equation}
 where function $dist: Point \times Point \to real\ number$ computes the distance between two points, and $positions[k,0]$ and $positions[k,1]$ are the coordinates of the user's left/right hand in frame $k$. A piecewise linear interpolation method is used to map the average distance $Dist[i]$ to the $P[i]$, which is the $P$ value of the user's behaviour at frame $i$. Two same-length ascendingly sorted arrays of thresholds, $potency$ and $distance$, are defined. The first and the last elements of array $potency$ are $-4.3$ and $4.3$, respectively. And the first and last elements of array $distance$ are $-\infty$ and $+\infty$, respectively. The algorithm used in the mapping between $Dist[i]$ and the $P[i]$ is as following:
-$$P[i]=(Dist[i]-distance[k-1]) * \dfrac{potency[k]-potency[k-1]}{distance[k]-distance[k-1]} + potency[k-1]$$
+\begin{equation}
+P[i]=(Dist[i]-distance[k-1]) * \dfrac{potency[k]-potency[k-1]}{distance[k]-distance[k-1]} + potency[k-1]
+\end{equation}
 where $distance[k] \geq Dist[i]>distance[k-1]$.
 
 A set of $P$ values (say, from $P[i]$ to $P[j]$, $i \leq j$) are temporally smoothed in the Buffer to compute the final $P$ value that is fed into the Emotion Updater. The smoothing algorithm ensures that the influence of the $P[k], i \leq k \leq j$, decays with time. The smoothing algorithm used in the Buffer can be illustrated by the following formula:
-$$P=\sum_{k=i}^{j}(\dfrac{alpha}{alpha+1})^{j-k}*\dfrac{1}{alpha+1}*P[k]$$ where $alpha \geq 0$.
+\begin{equation}
+P=\sum_{k=i}^{j}(\dfrac{alpha}{alpha+1})^{j-k}*\dfrac{1}{alpha+1}*P[k]
+\end{equation}
+where $alpha \geq 0$.
 If $alpha=0$, then $P=P[j]$, which means that no temporal smoothing is used to compute the final $P$ value.
 
 Similarly, the $A$ value of the user's behaviour are calculated based on the average of the distances his/her hands move between $n$ neighbouring frames. The average movement $Diff[i]$ during frames $i-n+1, i-n+2, ... , i$ can be computed by the following formula:
-$$Diff[i]=\dfrac{1}{n-1}\sum_{k=i-n+2}^{i}maxDiff(positions[k],positions[k-1])$$
+\begin{equation}
+Diff[i]=\dfrac{1}{n-1}\sum_{k=i-n+2}^{i}maxDiff(positions[k],positions[k-1])
+\end{equation}
 where $position[k]$ contains a pair of coordinates representing the user's left and right hand locations respectively in frame $k$, and function $maxDiff: (Point_a, Point_b) \times pair(Point_c,\\ Point_d) \to real\ number$ returns $max(dist(Point_a, Point_c), dist(Point_c, Point_d))$. Piecewise linear interpolation method is used to map the average distance $Diff[i]$ to the $A[i]$, which is the $A$ value of the user's behaviour at frame $i$. Two same-length ascendingly sorted arrays of thresholds, $activity$ and $difference$, are defined. The first and the last elements of array $activity$ are $-4.3$ and $4.3$, respectively. And the first and last elements of array $difference$ are $-\infty$ and $+\infty$, respectively. The mapping algorithm between $Diff[i]$ and $A[i]$ is as following:
-$$A[i]=(Diff[i]-difference[k-1])*\dfrac{activity[k] - activity[k-1]}{difference[k] - difference[k-1]}+activity[k-1]$$
+\begin{equation}
+A[i]=(Diff[i]-difference[k-1])*\dfrac{activity[k] - activity[k-1]}{difference[k] - difference[k-1]}+activity[k-1]
+\end{equation}
 where $difference [k] \geq Diff[i] > difference[k-1]$.
 
 A set of $A$ values (say, from $A[i]$ to $A[j]$, $i \leq j$) are temporally smoothed in the Buffer to compute the final $A$ value that is fed into the Emotion Updater. The smoothing algorithm ensures that the influence of the $A[k]$, $i \leq k \leq j$, decays with time. The smoothing algorithm used in the Buffer can be illustrated by the following formula:
-$$A=\sum_{k=i}^{j}(\dfrac{alpha}{alpha+1})^{j-k}*\dfrac{1}{alpha+1}*A[k]$$ where $alpha \geq 0$.
+\begin{equation}
+A=\sum_{k=i}^{j}(\dfrac{alpha}{alpha+1})^{j-k}*\dfrac{1}{alpha+1}*A[k]
+\end{equation}
+where $alpha \geq 0$.
 If $alpha=0$, then $A=A[j]$, which means that no temporal smoothing is used to compute the final $A$ value.
 
 Note that in the computations of $P$ and $A$, variables $n$, $potency$, $distance$, $activity$ and $difference$ are used in the EPA-Calculator and $alpha$ is used in the Buffer. The values of these variables need to be set when running the system. Moreover, the number of values used to compute the final $P$ and $A$ values needs to be set in the Buffer as well. Chapter~\ref{chap:result} described a way to set the thresholds $potency$, $distance$, $activity$ and $difference$ by statistical results from experiments. In this prototypical approach, the unweighted means of distances were used and scaled to $P$'s and $A$'s; weighted average, and/or more other features can be included as indicators for the EPA values of user behaviours in future approaches.
@@ -195,7 +209,9 @@ Each of the prompts in the dataset of the Prompt Selector has two labels: one st
 To utilize the pre-generated and evaluated prompts as a dataset from which the most proper prompt is selected, a file describing all these prompts (e.g. what the labels of each prompt is) is needed. When the system starts, it reads the file and stores the descriptions of prompts and their labels in memory for later use. This thesis project uses a csv file with headers ``filename'', ``prompt\_number'', ``evaluation'', ``potency'', ``activity'' to save information of the prompts. Among all the columns, ``prompt\_number'' is the integral propositional label of a prompt and ``evaluation'', ``potency'', ``activity'' are three real numbers representing the EPA values of the same prompt. 
 
 Given the propositional and emotional descriptions of desired prompts (obtained from the BayesAct server component), the Prompt Selector is able to select the most proper prompts in the dataset via a distance-based method. To illustrate how the selector works, we first define the distance between two vectors of EPA values as the weighted Euclidean distance between them:
-$$dist((E_1, P_1, A_1), (E_2, P_2, A_2))=\sqrt{(w_E(E_1-E_2))^2+(w_P(P_1-P_2))^2+(w_A(A_1-A_2))^2}$$
+\begin{equation}
+distance((E_1, P_1, A_1), (E_2, P_2, A_2))=\sqrt{w_E(E_1-E_2)^2+w_P(P_1-P_2)^2+w_A(A_1-A_2)^2}
+\end{equation}
 where $w_E$, $w_P$ and $w_A$ are weights for the three dimensions respectively. We then define the emotional distance between two prompts as the distance between their emotional annotations, i.e. the EPA values assigned to them. When given the propositional and emotional descriptions of the desired prompt, the selector selects out the video prompt that simultaneously has the same propositional label as and the minimal emotional distance to that desired prompt. In our implementation, the weights $w_E$, $w_P$ and $w_A$ are assigned values $\{1, 1, 1\}$; other values and even other definitions of the distances can be tried out in future improvements.
 
 After the proper prompt is selected, a Prompt Player is used to display the video prompt. The Prompt Player was implemented using libVLC (VLC SDK), a mature and easy-to-use media framework that can be embedded into systems to provide multimedia capabilities for the applications.
