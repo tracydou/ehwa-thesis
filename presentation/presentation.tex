@@ -1,0 +1,695 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Master Thesis Presentation]{An assistive handwashing system with emotional intelligence}
+% The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Luyuan Lin} % Your name
+\institute[UWaterloo] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+University of Waterloo \\ % Your institution for the title page
+\medskip
+\textit{Supervisor:
+\newline Jesse Hoey
+} % Your email address
+}
+\date{\today} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+%------------------------------------------------
+\section{Problem Statement} 
+% Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+%------------------------------------------------
+\subsection{Motivation}
+\begin{frame}
+\frametitle{Problem Statement - Motivation}
+The COACH system:
+\begin{itemize}
+\item is an assistive system helping with an elder's daily activities
+\item monitors a user washing his/her hands and when needed
+\item detects when the user has lost track of what he/she is doing
+\item displays a prerecorded assistive prompt
+\item works well for some persons, but not as well for others
+\end{itemize}
+\pause
+Using Emotional Intelligence in Assitive Systems
+\begin{itemize}
+\item recognize affective states
+\item generate affective signals
+\item study human emotions
+\item computationally model affective HCIs
+\end{itemize}
+\end{frame}
+
+\subsection{Objectives}
+\begin{frame}
+\frametitle{Problem Statement - Objectives}
+To augment the COACH system with an emotional reasoning engine based on BayesACT so that the augmented system:\\
+\begin{itemize}
+\item is designed in a portable and extensible way
+\item runs in real-time from the perspective of the user group
+\item provides at least a level of functional assistance of as high quality as the COACH
+\item is able to tune the prompts in some way according to the emotional state of a user
+\end{itemize}
+\vspace{0.3cm}
+Note: The last objective is ill-defined, as the question of how exactly tuning prompts to users will be most effective is not clear at this point.
+\end{frame}
+
+%------------------------------------------------
+\section{Basic Concepts}
+%------------------------------------------------
+\subsection{Affect Control Theory (ACT)}
+\begin{frame}
+\frametitle{Concepts - ACT}
+Affect Control Theory (ACT)
+\begin{itemize}
+\item represents emotions as vectors that represent evaluation ($E$), potency ($P$), and activity ($A$) respectively \pause
+\item describes social events by an Actor-Behaviour-Object (ABO) grammar \pause
+\item ``fundamentals'' of identities and behaviours; shared between people within a same culture \pause
+\item ``transient impressions'': emotional feelings of people evoked by a specific event \pause
+\end{itemize}
+\begin{block}{The ACT Principal}
+Actors work to experience transient impressions that are consistent with their fundamental sentiments.
+\end{block}
+\end{frame}
+
+\subsection{Partially Observable Markov Decision Process (POMDP)}
+\begin{frame}
+\frametitle{Concepts - POMDP}
+Markov Decision Process (MDP)
+\begin{itemize}
+\item agent makes sequential decisions on discrete time
+\item $<S, A, T(s^{t+1},s^t,a^t), R(s^{t+1},s^t,a^t)>$
+\item maximize long term rewards
+\item policy - mapping from state to action
+\end{itemize}
+\pause
+Partially Observable MDP (POMDP)
+\begin{itemize}
+\item extended from MDP, involves observations
+\item maximize long term rewards based on history (actions and observations)
+\item computationally harder
+\end{itemize}
+\end{frame}
+
+
+\subsection{BayesACT}
+\begin{frame}
+\frametitle{Concepts - BayesACT}
+Markov Decision Process (MDP)
+\begin{itemize}
+\item agent makes sequential decisions on discrete time
+\item $<S, A, T(s^{t+1},s^t,a^t), R(s^{t+1},s^t,a^t)>$
+\item maximize long term rewards
+\item policy - mapping from state to action
+\end{itemize}
+\pause
+Partially Observable MDP (POMDP)
+\begin{itemize}
+\item extended from MDP, involves observations
+\item maximize long term rewards based on history (actions and observations)
+\item computationally harder
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\section{Solution}
+\subsection{Selection based on battery depletion rate}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Selection Criteria}
+For the good of mobile user experience, what is the most concerning?\\
+\vspace{0.3cm}
+\pause
+Concerns
+\begin{itemize}
+\item slow
+\item weak signal strength
+\item crashing down
+\item short battery life (top gripe)
+\end{itemize}
+\vspace{0.3cm}
+\pause
+Focus on battery life
+\begin{itemize}
+\item battery life is visible (opposed to CPU, Memory)
+\item simplified for research purpose
+\item battery depletion rate (ranking of implementations as suggestion)
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------
+\subsection{Mobile battery consumption model}
+
+\begin{frame}
+\frametitle{How to obtain battery depletion rate}
+Pure experiments
+\begin{itemize}
+\item record battery depletion rate for every implementation candidates
+\item low-efficient
+\end{itemize}
+\vspace{0.3cm}
+\pause
+Experiments \& Estimation
+\begin{itemize}
+\item do some benchmark experiments
+\item estimate a battery depletion rate based on benchmark and other information
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Mobile battery consumption model}
+Battery consumption comes from different components
+\begin{itemize}
+\item signal standby
+\item screen display
+\item CPU
+\item WIFI/3G
+\item sensors
+\end{itemize}
+\vspace{0.3cm}
+\pause
+The usage of these components can be translated into battery consumption\\
+\vspace{0.3cm}
+\pause
+We consider CPU and WIFI (ignore other three)
+\end{frame}
+
+\begin{frame}
+\frametitle{Mobile battery consumption model details}
+Suppose the POMDP makes decision every $T$ (actual execution time is $t$, and the rest $T-t$ is idle)
+\begin{itemize}
+\item $r_T = r_{CPU}*t/T + r_{Base}(T)$ (mobile only, WIFI off)
+\item $r_T = r_{WIFICom}*t/T + r_{WIFIIdle}*(T-t)/T + r_{Base}(T)$ (mobile/server)
+\end{itemize}
+\vspace{0.3cm}
+\pause
+\begin{figure}
+\includegraphics[width=120mm]{equation_demo.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Mobile battery consumption model details}
+Benchmark: $<r_{CPU},r_{WIFICom},r_{WIFIIdle},r_{Base}(T)>$\\
+\vspace{0.2cm}
+$r_{Zero}$: BDR of mobile device doing nothing\\
+\vspace{0.2cm}
+$r_{CPU}$: BDR of full cycle CPU usage minus $r_{Zero}$\\
+\vspace{0.2cm}
+$r_{WIFICom}$: BDR of continuous WIFI communication minus $r_{Zero}$\\
+\vspace{0.2cm}
+$r_{WIFIIdle}$: BDR of WIFI on minus $r_{Zero}$\\
+\vspace{0.2cm}
+$r_{Base}(T)$:
+\begin{figure}
+\includegraphics[width=120mm]{baseline_demo.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Mobile battery consumption model example}
+For a particular POMDP problem, given a set of implementation candidates implm1, implm2, implm3, ..., we examine the average BDR on three typical time interval T1, T2, T3:
+\begin{itemize}
+\item obtain benchmark $<r_{CPU},r_{WIFICom},r_{WIFIIdle},r_{Base}(T)>$
+\item record average actual execution time $t$ for each implementation candidate
+\item apply to the formula above, get $r_{T_1}$, $r_{T_2}$, $r_{T_3}$ for each implementation candidate
+\item rank implementations based on their $\frac{r_{T_1}+r_{T_2}+r_{T_3}}{3}$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Mobile battery consumption model advantages}
+Using mobile battery consumption model to estimate BDR is fast
+\begin{itemize}
+\item a lot of implementation candidates to rank, only minutes for each (opposed to actual battery experiment for each)
+\item benchmark is device-determined, independent from POMDP problem
+\item benchmark might be shared among similar kind of devices (have no/little effects on ranking)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Data is big}
+Analysing a huge and complex dataset is both exciting and challenging:
+\pause
+\begin{itemize}
+\item It can make information transparent and usable at a much higher frequency. 
+\item It contains lots of new knowledge for us to discover. 
+\pause
+\item But, it would bring really high dimensionality to models, complex to find causal relationships hidden behind the data.
+\pause
+\item Especially from dataset with a lot of missingness.
+\end{itemize}
+\end{frame}
+%-----------------------------------------------------------
+\begin{frame}
+\frametitle{Data missingness}
+\begin{table}
+\begin{tabular}{l r r r}
+\toprule
+\textbf{Features} & \textbf{NA rate} & \textbf{Ventilated NA} & \textbf{Non-Ventilated NA}\\
+\midrule
+max.pH & 60\% & 24\% & 77\%\\
+min.pH & 67\% & 34\% & 83\%\\
+max.pCO2 & 60\% & 24\% & 77\%\\
+min.pCO2 & 67\% & 34\% & 83\%\\
+WorstComaStatus & 79\% & 85\% & 76\%\\
+... & ...&...&...\\
+\toprule
+\textbf{Outcomes} & \textbf{0 rate} & \textbf{Ventilated 0} & \textbf{Non-Ventilated 0}\\
+DeltaPOPC* & 86\% & 77\% & 90\%\\
+DeltaPCPC* & 93\% & 85\% & 97\%\\
+\bottomrule
+\end{tabular}
+\caption{Missing (NA) rate for important features}
+\fontsize{2mm}{1mm}\selectfont
+*POPC: Pediatric Overall Performance Category
+\fontsize{2mm}{1mm}\selectfont
+*PCPC: Pediatric Cerebral Performance Category
+\end{table}
+\pause
+\fontsize{3mm}{6mm}\selectfont
+\textbf{Differences between ventilated and non-ventilated missing rate might due to standard medical procedures, and is likely to remain the same in the future.}
+\end{frame}
+%----------------------------------------------------------
+\subsection{Missingness encoding}
+\begin{frame}
+\frametitle{Shall we impute the data?}
+Data imputation: try to predict and fill in missing values from observed values
+\end{frame}
+%-----------------------------------------------------------
+\begin{frame}
+\frametitle{Missingness encoding}
+Because data are missing for a reason:
+\begin{table}
+\begin{tabular}{l r r r}
+\toprule
+\textbf{Features} & \textbf{NA rate} & \textbf{Ventilated NA} & \textbf{Non-Ventilated NA}\\
+\midrule
+PhHigh & 60\% & 24\% & 77\%\\
+PhLow & 67\% & 34\% & 83\%\\
+Pco2High & 60\% & 24\% & 77\%\\
+Pco2Low & 67\% & 34\% & 83\%\\
+WorstComaStatus & 79\% & 85\% & 76\%\\
+... & ...&...&...\\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+%----------------------------------------------------------
+\begin{frame}
+\frametitle{Missingness encoding}
+Based on the assumption that missingness distribution will still be the same in the future, we take two encoding approaches for two different models: 
+\begin{itemize}
+\item for regression models, we encode each NA as ``0", add a dummy variable column for each feature indicating missingness 
+\newline (1=missing, 0=not missing)
+\item for tree models, we encode each NA as mean value of the column, add a dummy variable column for each feature indicating missingness (1=missing, 0=not missing)
+\end{itemize}
+\end{frame}
+%-----------------------------------------------------------
+\section{Experiment and Evaluation}
+
+\begin{frame}
+\frametitle{Causal Inference}
+\begin{figure}
+\includegraphics[width=100mm]{correlation.png}
+\newline from xkcd.com
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Causal Inference}
+We need to evaluate the effect of ventilator on PICU patient's outcome (mortality), so causal inference model is necessary.
+\newline 
+\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+\column{.45\textwidth} % Left column and width
+\fontsize{4mm}{4mm}\selectfont
+\pause
+\textbf{Ideally, with randomized trial data...}
+\begin{itemize}
+\pause
+\fontsize{3mm}{4mm}\selectfont
+\item ventilators are assigned randomly
+\item treated group and control group have identical feature distribution, no confounding
+\pause
+\item we can compare outcome of treated patients with outcome of control patients to identify the effect of mechanical ventilation
+\item we can also use regression to find out which patients benefit the most from mechanical ventilation
+\end{itemize}
+\pause
+\column{.5\textwidth} % Right column and width
+\textbf{However, in reality...}
+\begin{itemize}
+\fontsize{3mm}{4mm}\selectfont
+\item ventilators were assigned according to clinical judgement, since randomization is not ethical
+\item treated group and control group have very different feature distributions
+\pause
+---ventilated patients are ``sicker"
+\pause
+\item if we simply compare their outcomes, ventilated patients mortality rate seems to be 7\% higher than non-ventilated patients, but it does not mean giving a ventilator is bad
+\pause 
+\item How to compare outcomes?
+\end{itemize}
+\end{columns}
+\end{frame}
+%---------------------------------------------------
+\begin{frame}
+\frametitle{Match the patients}
+We need to match patients: 
+\newline 
+\begin{itemize}
+\item Matching tries to find each treated individual (ventilated patient) a treated-patient-counterpart (matched control patient) in the control group
+\item This matched control patient should have the most similar feature values to the treated individual
+\pause
+\item The outcome of the matched control patient is used for the \textbf{counterfactual outcome} of the treated patient (the outcome had the treated patient not received a ventilator) according to the Rubin Causal Model
+\item One of the most popular and promising methods of matching is the use of Propensity Scores.
+\end{itemize}  
+\end{frame}
+%-----------------------------------------------------------
+\begin{frame}
+\frametitle{Propensity Score Matching}
+Propensity score: the conditional probability of receiving the treatment given an individual's features
+\newline 
+\newline This propensity score model is also known as the ``treatment policy"
+\pause
+\newline 
+\newline Use propensity score model to conduct matching:
+\begin{enumerate}
+\item use statistical/machine learning models to learn the treatment policy from the dataset (except outcome)
+\item record the propensity score this treatment policy assigns for each patient
+\item find each treated (ventilated) patient a match patient in the control (non-ventilated) group with the closest propensity score
+\item a control individual might be matched more than once
+\end{enumerate} 
+\end{frame}
+%-----------------------------------------------------------
+\subsection{Learn the treatment policy}
+
+\begin{frame}[fragile]
+\frametitle{Re-construct the treatment policy}
+We use logistic regression and decision tree model to learn the assignment policy from the data, but only logistic regression results are used in matching:
+\begin{block}{Logistic Regression Ventilator Treatment Policy Model}
+use ventilator assignment as model output, remove all the outcomes from feature set, use the rest of features (NA encoded as ``0") as well as their missing indicators 
+\begin{verbatim}
+Ventilator~vars+missingness
+\end{verbatim}
+\end{block}
+\begin{block}{Decision Tree Ventilator Treatment Policy Model}
+classify ventilator assignment, remove outcome features, use the rest of mean-imputed features as well as their missing indicators: 
+\begin{verbatim}
+Ventilator~vars+missingness
+\end{verbatim}
+\end{block}
+\end{frame} 
+%-------------------------tree models----------------------------------
+\begin{frame}
+\frametitle{Decision Tree Ventilator Treat Policy Model}
+\begin{figure}
+\includegraphics[width=90mm]{rpart08051.png}
+\end{figure}
+\end{frame}
+%-----------------------------------------------------------
+\subsection{Match with propensity score}
+\begin{frame}
+\frametitle{Logistic Regression Ventilator Treatment Policy Model}
+\begin{table}
+\resizebox{0.75\textwidth}{!}{%
+\begin{tabular}{l l l l}
+\toprule
+\textbf{Feature} & \textbf{Estimate} & \textbf{Std.Error} & \textbf{Signif.Code}\\
+\midrule
+max.pH	& 5.7142666	& 0.312283 & ***\\
+min.pH	& -2.43043	& 0.297853 & ***\\
+(Intercept)	& 2.1823757	& 0.1620187 & ***\\
+origin20	 & 1.9733549	 & 0.1797177 & ***\\
+dx15PimLowRiskYes & -1.8883596 & 0.3229063 & ***\\
+dx16Prism1 & 1.823 & 0.3065 &  ***\\
+dx15Prism1 &	-1.4193727	& 0.3100689 & ***\\
+NA.GlasgowComaScore1 & 1.7761392 & 0.0358459 &  ***\\
+NA.max.pH1	& -0.9285517  & 0.1927179 &  ***\\
+PopcAdmit4 & 1.2742374 & 0.081754 &  ***\\
+NA.PupilReaction1 & -0.827305 & 0.0466854 &  ***\\
+PcpcAdmit4	& -0.7671332  & 0.0876789 &  ***\\
+... & ...&...&...\\
+\bottomrule
+\end{tabular}
+}
+\caption{Logistic Regression Ventilator Treatment Policy Model
+\newline Sig.Code: *** p-value$<$0.001;
+** 0.001$<=$p-value$<$0.01;
+* 0.01$<=$p-value$<$0.05}
+\end{table}
+\end{frame}
+%-----------------------------------------------------------
+\subsection{Analyse the matching results}
+\begin{frame}
+\frametitle{Matching results comparison}
+\begin{table}
+\begin{tabular}{l l}
+\toprule
+\textbf{Model} & \textbf{Estimated Effect*}\\
+\midrule
+Without matching & 0.06907023\\
+Logistic regression matching  & 0.0029017 \\
+\bottomrule
+\end{tabular}
+\caption{Matching results comparison}
+\fontsize{3mm}{1mm}\selectfont
+*Average Estimated Effect of Mechanical Ventilator on Mortality among Ventilated Patients
+\end{table}
+\end{frame}
+%-----------------------------------------------------------
+\begin{frame}
+\frametitle{Several thoughts}
+Estimated effect on mortality is not significantly different from zero
+\newline 
+\pause
+\newline Possibilities:
+\begin{enumerate}
+\item The counterfactual outcomes from matching are of poor quality
+\pause
+\item Ventilators have different effects among different sub-populations
+\end{enumerate}
+\end{frame}
+%-----------------------------------------------------------
+\begin{frame}
+\frametitle{Matching is not good enough?}
+Possibility 1: Matching (propensity score model) is not good enough?
+\end{frame}
+%-----------------------------------------------------------
+\begin{frame}
+\frametitle{Quality of Matching}
+\begin{table}
+\resizebox{1\textwidth}{!}{%
+\begin{tabular}{l l l l}
+\toprule
+\textbf{Feature} & \textbf{var.ratio* before matching} & \textbf{var.ratio after matching} & \textbf{improved?}\\
+\midrule
+PhHigh &	 2.9134 	 	&     1.1205 	&	Yes\\
+Pco2High &	5.0744 	 &	    0.69964 	&  Yes	\\
+PupilReaction3 & 	3.2278 	 	 &    1.4426 	&	Yes\\
+GlasgowComaScore &	3.6439 	 	&     0.8961	 &	Yes\\
+origin20 &	9.2555 	 	&    0.70828	 &	Yes\\
+PopcAdmit4 &	 1.8238 	 	&    0.82998	 &	Yes\\
+originAnotherICU1	&	1.843 	 &	     1.021	& Yes\\
+postop & 1.0259 	 	&     1.0691  & No\\
+... & ...&...&...\\
+\bottomrule
+\end{tabular}}
+\caption{MatchBalance performance of Logistic Regression Propensity Score Model}
+\fontsize{3mm}{1mm}\selectfont
+*var.ratio before matching=var.treated/var.control
+\fontsize{3mm}{1mm}\selectfont
+\newline *var.ratio after matching=var.treated/var.matched
+\end{table}
+\pause
+Features are not perfectly balanced, but matching improves most of them.  
+\end{frame}
+%-------------------------------------------------------------
+\begin{frame}
+\frametitle{Histogram of regression treatment policy model}
+\begin{figure}
+\includegraphics[width=80mm]{testhist.pdf}
+\end{figure}
+\end{frame}
+%-----------------------------------------------------------
+\begin{frame}
+\frametitle{Ventilator does not always save?}
+Possibility 2: Ventilators have different effects on different patients?
+\end{frame}
+%-----------------------------------------------------------
+\begin{frame}[fragile]
+\frametitle{Who might benefit the most from a ventilator?}
+\begin{enumerate}
+\item According to the Rubin Causal Model, we construct a new binary outcome named ``helped":
+\begin{verbatim}
+if treated.Mortality < control.Mortality: helped = 1;
+else: helped = 0
+\end{verbatim}
+\pause
+\item Use decision tree model to learn and classify this new outcome from all features among treated patients
+\begin{verbatim}
+helped~vars+missingness (among treated patients)
+\end{verbatim}
+\end{enumerate}
+\end{frame}
+%-----------------------------------------------------------
+\begin{frame}
+\frametitle{Decision Tree ``helped" Model}
+Decision Tree ``helped" Model:
+\begin{figure}
+\includegraphics[width=100mm]{finaltree.png}
+\end{figure}
+\end{frame}
+%-------------------------------------------------------------
+\section{Conclusions and Future Plan}
+\begin{frame}
+\frametitle{Conclusions}
+\begin{itemize}
+\item Casual reasoning is necessary to obtain meaningful results in this setting
+\item Though the missing of important features and their measurement time make causal inference very challenging, we are still cautiously optimistic that matching corrects for imbalances between the treated and control groups
+\item Currently we believe that patients who have their pCO2 measured and a
+low Glasgow Coma Score are most likely to be helped by mechanical ventilation. We are interested in discussing with clinicians why this might be the case.
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------
+\begin{frame}
+\frametitle{Future Plans}
+\begin{itemize}
+\item In the future, we will conduct a simulation study using synthetic data similar to our real data to assess the performance of matching when we know the ground truth.
+\item We will investigate whether some counterfactual outcomes of treated patients are in fact known, and do not need to be matched: For example, some ventilated patients would certainly die without a ventilator.
+\item We aim to develop a policy for ventilator triage.
+\pause
+\item We will try the model on the new dataset!
+\end{itemize}
+\end{frame}
+%---------------------------------------------------------------
+\begin{frame}
+\frametitle{Acknowledgements}
+\begin{itemize}
+\item We would like to thank Virtual PICU Systems (VPS) and Children's Hospital of Los Angeles (CHLA) for collecting and generously providing the data for our project. 
+\item We also would like to thank Professor Dr. Randal Wetzel and Mr. David Kale for their kindly help and advices to our project. 
+\item We also acknowledge support from the Natural Sciences and Engineering Research Council (NSERC) of Canada.
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{References}
+\fontsize{1mm}{0.1mm}\selectfont
+[1] Brookhart, M Alan, Schneeweiss, Sebastian, Rothman, Kenneth J, Glynn, Robert J, Avorn, Jerry, and Sturmer, Til. Variable selection for propensity score models. American journal of epidemiology, 163(12):1149-1156, 2006.
+\newline [2] Garg, Amit X, Adhikari, Neill KJ, McDonald, Heather, Rosas-Arellano, M Patricia, Devereaux, PJ, Beyene, Joseph, Sam, Justina, and Haynes, R Brian. Effects of computerized clinical decision support systems on practitioner performance and patient outcomes. JAMA: the journal of the American Medical Association, 293(10):1223-1238, 2005.
+\newline [3] Greenland, Sander. Quantifying biases in causal models: classical confounding vs. collider stratication bias. Epidemiology, 14(3):300-306, 2003.
+\newline [4] Ihaka, Ross. R: Past and future history. COMPUTING SCIENCE AND STATISTICS, pp. 392-396, 1998.
+\newline [5] Kale, David. Quick and dirty data dictionary for vps data. Technical report, Children's Hospital Los Angeles, Los Angeles,CA, 2012.
+\newline [6] Pollack, Murray M, Patel, Kantilal M, and Ruttimann, Urs E. Prism iii: an updated pediatric risk of mortality score. Critical care medicine, 24(5):743-752, 1996.
+\newline [7] Rosenbaum, Paul R and Rubin, Donald B. The central role of the propensity score in observational studies for causal e ects. Biometrika, 70(1):41-55, 1983.
+\newline [8] Rubin, Donald B. Estimating causal e ects of treatments in randomized and nonrandomized studies. Journal of educational Psychology, 66(5): 688-701, 1974.
+\newline [9] Rubin, Donald B and Thomas, Neal. Matching using estimated propensity scores: relating theory to practice. Biometrics, pp. 249-264, 1996.
+\newline [10] Stuart, Elizabeth A. Matching methods for causal inference: A review and a look forward. Statistical science: a review journal of the Institute of Mathematical Statistics, 25(1):1, 2010.
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{The end}
+\Huge{\centerline{Thank you!}}   
+\fontsize{5mm}{4mm}
+\begin{itemize}
+\item Questions?
+\item Comments?
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------------------------------------
+
+\end{document} 
