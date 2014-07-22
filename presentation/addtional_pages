@@ -1,0 +1,50 @@
+
+%pseudo-code page: how planstep is updated according to behavioural obs, awareness, & deflection
+\begin{frame}
+\frametitle{Update $X_{ps}'$ based on observation $\Omega_{x}$ and $\{X_{ps}, X_{behav}, X_{aw}, F, T\}$}
+\begin{itemize}
+\item $SampleXVar()$ and $evalSampleXVar()$
+%----------------- second item -----------------
+\pause \item Pseudocode of $SampleXVar()$
+\begin{algorithm}[H]
+\begin{algorithmic}[5]
+\IF {Deflection(F, T) is high} {
+  prob-threshold = high
+} \ELSE {
+  prob-threshold = low
+} \ENDIF
+\IF {aw high} {
+  \IF {prompted} {
+    \IF {$random\_prob()$ < prob-threshold} {
+       aw = low and not moving forward
+    } \ELSIF {prompt wrong} {
+       aw = low and not moving forward
+    } \ELSIF {likely} {
+       moving forward
+    } \ELSIF {$random\_prob()$ < prob-threshold} {
+       aw = low and not moving forward
+    } \ENDIF
+  } \ELSE {
+    \IF {$random\_prob()$ < prob-threshold} {
+      aw = low and not moving forward
+    } \ELSE {
+      aw stays high and moving forward
+    } \ENDIF
+  } \ENDIF
+} \ELSE {
+  \IF {prompted} {
+    \IF {$random\_prob()$ > prob-threshold \AND prompt correct} {
+	move on and aw high
+    } \ELSE {
+        unlikely: aw high and not moving forward
+    } \ENDIF
+  } \ELSE {
+      unlikely: aw high and moving forward
+  } \ENDIF
+} \ENDIF
+\end{algorithmic}
+\end{algorithm}
+%----------------- third item -----------------
+\pause \item $Pr: X_{behav} \to \Delta(\Omega_{x})$ used in $evalSampleXVar()$
+\end{itemize}
+\end{frame}

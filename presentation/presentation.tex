@@ -79,10 +79,12 @@
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 
 \usepackage{array}
+
+\usepackage{algorithm,algorithmic}
 \newcolumntype{V}[1]{>{\centering\arraybackslash} m{#1} }
 \newcolumntype{L}[1]{>{\arraybackslash} m{#1} }
 
-\pdfpageattr {/Group << /S /Transparency /I true /CS /DeviceRGB>>}
+\pdfpageattr {/Group << /S /Transparency /I true /CS /DeviceRGB>>}%solves color issues brought by inserting pdf figures
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -247,26 +249,64 @@ where $t'$ can be computed from $\{f', t, x\}$ by empirically derived prediction
 %------------------------------------------------
 \begin{frame}
 \frametitle{Solution - Overview}
+\begin{block}{Goal}
+\small{
+Design an \textit{extensible} system that assists \textit{people with dementia} during a hand-washing process by \textit{assessing their states} and \textit{provide instructions accordingly}.
+}
+\end{block}
 %insert figure describing the functionality of each component of the system
 %state how each component is related to our objective
+\pause 
+\begin{figure}
+\centering
+\includegraphics[trim = 5mm 15mm 5mm 20mm, clip, width=.8\linewidth]{fig/fig-system-overview.pdf}
+\end{figure}
+%state the server-client model is used & a "buffer" component is involved
+%we focus on explaining how the servers is designed in "components" and then how they coordinate later
 \end{frame}
 
 %------------------------------------------------
 \subsection{Components}
+
 \begin{frame}
 \frametitle{Solution - the Planstep and Emotion Updater}
-%insert figure: the model & how emotional states are updated
+%insert figure: designing & implementing the two updaters as a single reasoning engine
+Design the Planstep and Emotion Updaters basing on the BayesAct code
+\begin{figure}[htp]
+\centering
+\includegraphics[trim = 4mm 30mm 5mm 15mm, clip, width=0.9\linewidth]{fig/fig-updater.pdf}
+\label{fig:updater}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solution - the Planstep and Emotion Updater cont.}
+%planstep definitions: the 8 ps & 5 behaviours monitored
+A planstep update diagram
+\begin{figure}[htp]
+\centering
+\includegraphics[trim = 20mm 50mm 20mm 50mm, clip, width=0.8\textwidth]{fig/fig-planstep.pdf}
+\label{fig:planstep}
+\end{figure}
+\begin{itemize}
+\pause \item Eight plansteps: (0) ``off/dirty/dry'', (1) ``on/dirty/dry'', (2) ``off/soapy/dry'', (3) ``on/soapy/dry'', (4) ``on/clean/wet'', (5) ``off/clean/wet'', (6) ``on/clean/dry'', (7) ``off/clean/dry''
+\pause \item Five behaviours: A1 to A5 are ``turn on water'', ``put on soap'', ``rinse hands'', ``turn off water'', and ``use towel'', respectively.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solution - the Planstep and Emotion Updater cont.}
+%insert figure: the model & how emotional states are updated (explaining how the bayesact framework works in a specific app scenario)
 %note: there's a noise parameter describing the confidence of a certain result
-\end{frame}
-
-\begin{frame}
-\frametitle{Solution - the Planstep and Emotion Updater cont.}
-%pseudo-code: how planstep is updated according to behavioural obs, awareness, & deflection
-\end{frame}
-
-\begin{frame}
-\frametitle{Solution - the Planstep and Emotion Updater cont.}
-%state the server-client model is used & a "buffer" component is involved
+Use the BayesACT framework in the handwashing scenario
+\begin{itemize}
+\item Recall: BayesACT includes states $S = \{X, F, T\}$, observations $\Omega = \{\Omega_{x}, \Omega_{b}\}$, and agent actions $\{A, B_{a}\}$
+\pause \item In our hand-washing system, $X = \{X_{turn}, X_{ps}, X_{aw}, X_{bahav}\}$
+\pause \item $\Omega_{x}$ gives evidence to the system about $X$
+\pause \item $\Omega_{b}$ gives evidence to the system about $f_b$. The observation function $Pr(\Omega_b|f_b)$ allows one to specify the ``confidence'' or ``reliability'' of the different components of $\Omega_b$ by $\gamma$, which is the variance of a normal (Gaussian) distribution.
+\pause \item Compute $X_{ps}'$ based on observation $\Omega_{x}$ and $\{X_{ps}, X_{behav}, X_{aw}, F, T\}$
+\pause \item $A$ denotes the propositional content of a system message; $B_{a}$ denotes how the message should be expressed
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -300,9 +340,7 @@ where $t'$ can be computed from $\{f', t, x\}$ by empirically derived prediction
 %-----------------------------------------------------------
 \begin{frame}
 \frametitle{Experiments - Variables and Parameters}
-%planstep definitions: the eight ps & 5 behaviours monitored
 %locations of "certain objects": related to the 5 behaviours (give a screenshot of the physical settings; or mention would give)
-  * table defining all the parameters - explain the meanings of all the parameters
 \end{frame}
 
 \begin{frame}
@@ -390,5 +428,6 @@ Jesse Hoey
 % Additional pages
 % put pages in assistance to answering questions here
 %---------------------------------------------------------------
+
 
 \end{document} 
