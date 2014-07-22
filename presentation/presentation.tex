@@ -131,36 +131,25 @@ University of Waterloo \\ % Your institution for the title page
 \frametitle{Problem Statement - Motivation}
 The COACH system
 \begin{itemize}
-\item is an assistive system helping with an elder's daily activities
-\item monitors a user washing his/her hands
-\item detects when the user has lost track of what he/she is doing
-\item displays a prerecorded assistive prompt when needed
 \item works well for some persons, but not as well for others
+\item only considers functional states of users
 \end{itemize}
 \pause
-\vspace{0.3cm}
+\vspace{0.5cm}
 Using Emotional Intelligence in Assitive Systems
-\begin{itemize}
-\pause \item recognization of affective states
-\pause \item generation of affective signals
-\pause \item study of human emotions
-\pause \item computationally modelling affective HCIs
-\end{itemize}
 \end{frame}
 
 %------------------------------------------------
 \subsection{Objectives}
 \begin{frame}
 \frametitle{Problem Statement - Objectives}
-To augment the COACH system with an emotional reasoning engine based on BayesACT so that the augmented system:\\
+To augment the COACH system with an emotional reasoning engine so that the augmented system:\\
 \begin{itemize}
-\pause \item is designed in a portable and extensible way
-\pause \item runs in real-time from the perspective of the user group
-\pause \item provides at least a level of functional assistance of as high quality as the COACH
-\pause \item is able to tune the prompts in some way according to the emotional state of a user
+\item is designed in a portable and extensible way
+\item runs in real-time from the perspective of the user group
+\item provides a level of functional assistance
+\item produces the prompts according to the emotional state of a user
 \end{itemize}
-\vspace{0.3cm}
-\pause Note: The last objective is ill-defined, as the question of how exactly tuning prompts to users will be most effective is not clear at this point.
 \end{frame}
 
 %-----------------------------------------------------------------
@@ -171,10 +160,10 @@ To augment the COACH system with an emotional reasoning engine based on BayesACT
 \frametitle{Concepts - ACT}
 Affect Control Theory (ACT)
 \begin{itemize}
-\item represents emotions as vectors that represent evaluation ($E$), potency ($P$), and activity ($A$) respectively
-\pause \item describes social events by an Actor-Behaviour-Object (ABO) grammar
-\pause \item ``fundamentals'' of identities and behaviours; shared between people within a same culture
-\pause \item ``transient impressions'': emotional feelings of people evoked by a specific event
+\item represents emotions as EPA vectors
+\item describes social events by an Actor-Behaviour-Object grammar
+\item ``fundamentals'' of identities and behaviours; shared between people within a same culture
+\item ``transient impressions'': emotional feelings caused by a specific event
 \end{itemize}
 \pause
 \begin{block}{The ACT Principal}
@@ -183,84 +172,51 @@ Actors work to experience transient impressions that are consistent with their f
 \end{frame}
 
 %------------------------------------------------
-\subsection{Partially Observable Markov Decision Process (POMDP)}
-\begin{frame}
-\frametitle{Concepts - POMDP}
-Partially Observable Markov Decision Process (POMDP)
-\vspace{.3cm}
-\begin{columns}[c]
-\column{.5\textwidth}
-\includegraphics[trim = 15mm 10mm 15mm 10mm, clip, width=\linewidth]{fig/fig-pomdp.pdf}
-\column{.5\textwidth}
-\begin{itemize}
-\item A timeslice of a POMDP process (solid lines)
-\pause \item Variables: \{ $X$, $A$, $\mathbf{\Omega_{X}}$ \}
-\pause \item $Pr : X \to \Delta(\mathbf{\Omega_{X}})$, $Pr : X \times A \to \Delta(\mathbf{X})$
-\pause \item Reward Function: $R(A, X')$
-\pause \item Augmented with affective \\ states (dotted lines)
-\end{itemize}
-\end{columns}
-\end{frame}
-
-%------------------------------------------------
 \subsection{The BayesACT Framework}
 \begin{frame}
 \frametitle{Concepts - BayesACT}
 \begin{itemize}
 \item A Bayesian version of the ACT theory
-\item Combines the ACT with POMDP model so that can learn an interactant's identity
+\item Extends the ACT with POMDP model
 \end{itemize}
 %insert figure & explain the bayesact framework
-\pause
 \begin{columns}[c]
 \column{.5\textwidth}
 \includegraphics[trim = 20mm 10mm 20mm 10mm, clip, width=\linewidth]{fig/fig-bayesact.pdf}
 \column{.5\textwidth}
 \begin{itemize}
-\pause \item States $S = \{F, T, X\}$, where $F = \{F_{ij}\}, T = \{T_{ij}\}, i \in \{a, b, c\}, j \in \{e, p, a\}$
-\pause \item Observations $\Omega = \{\Omega_{X}, \Omega_{b}\}$
-\pause \item Actions $\{A, B_{a}\}$
-\pause \item By updating $F$, the probability distribution of the client's identity $F_{c}$ is learned
-\pause \item Calculate $\{A, B_{a}\}$ basing on $\{F, T, X\}$
+\item States $S = \{F, T, X\}$, where $F = \{F_{ij}\}, T = \{T_{ij}\}, i \in \{a, b, c\}, j \in \{e, p, a\}$
+\item Note: $F_{c}$ denotes the agent's belief of the client's identity
+\item Observations $\Omega = \{\Omega_{X}, \Omega_{b}\}$
+\item Actions $\{A, B_{a}\}$
+\item Calculate $\{A, B_{a}\}$ basing on $\{F, T, X\}$
 \end{itemize}
 \end{columns}
 \end{frame}
 
+
+%-----------------------------------------------------------------
+\section{Solution: System Design}
+%------------------------------------------------
 \begin{frame}
-\frametitle{Concepts - BayesACT cont.}
-Model formulation
+\frametitle{Solution - Representing ``Functional States''}
+%planstep definitions: the 8 ps & 5 behaviours monitored
+Planstep Definition and Update Diagram
+\begin{figure}[htp]
+\centering
+\includegraphics[trim = 20mm 50mm 20mm 50mm, clip, width=0.8\textwidth]{fig/fig-planstep.pdf}
+\label{fig:planstep}
+\end{figure}
 \begin{itemize}
-% ---- formula computing deflection ----
-\pause \item The deflection $\phi(F, T)$ between $F$ and $T$: 
-\begin{equation}\label{eq:eq_deflection}
-\phi(f,t) \propto e^{-(f'-t')\Sigma^{-1}(f-t)}
-\end{equation}
-% ---- formula computing probability of $f'$ ----
-\pause \item The probability of a post-action fundamental sentiment $f'$:
-\begin{equation}\label{eq:eq_pr_f}
-Pr(f'|f,t,x,b_{a},\phi) \propto e^{-\phi(f',t')-\xi(f',f,b_{a},x)} 
-\end{equation}
-where $t'$ can be computed from $\{f', t, x\}$ by empirically derived prediction equations of ACT.
-% ---- how the application progresses (i.e. how planstep changes in our case) ----
-\pause \item $Pr(x'|x,f',t',a)$: how the application progresses
-% ---- observation functions ----
-\pause \item $Pr(\omega_{b}|f)$ and $Pr(\omega_{x}|x)$: observation functions for the client behaviour sentiment and system state 
+\item Eight plansteps: (0) ``off/dirty/dry'', (1) ``on/dirty/dry'', (2) ``off/soapy/dry'', (3) ``on/soapy/dry'', (4) ``on/clean/wet'', (5) ``off/clean/wet'', (6) ``on/clean/dry'', (7) ``off/clean/dry''
+\item Five behaviours: A1 to A5 are ``turn on water'', ``put on soap'', ``rinse hands'', ``turn off water'', and ``use towel'', respectively.
 \end{itemize}
 \end{frame}
 
-%-----------------------------------------------------------------
-\section{Solution: System Design and Implementation}
-%------------------------------------------------
 \begin{frame}
 \frametitle{Solution - Overview}
-\begin{block}{Goal}
-\small{
-Design an \textit{extensible} system that assists \textit{people with dementia} during a hand-washing process by \textit{assessing their states} and \textit{provide instructions accordingly}.
-}
-\end{block}
 %insert figure describing the functionality of each component of the system
 %state how each component is related to our objective
-\pause 
 \begin{figure}
 \centering
 \includegraphics[trim = 5mm 15mm 5mm 20mm, clip, width=.8\linewidth]{fig/fig-system-overview.pdf}
@@ -274,32 +230,6 @@ Design an \textit{extensible} system that assists \textit{people with dementia} 
 
 \begin{frame}
 \frametitle{Solution - the Planstep and Emotion Updater}
-%insert figure: designing & implementing the two updaters as a single reasoning engine
-Design the Planstep and Emotion Updaters basing on the BayesAct code
-\begin{figure}[htp]
-\centering
-\includegraphics[trim = 4mm 30mm 5mm 15mm, clip, width=0.9\linewidth]{fig/fig-updater.pdf}
-\label{fig:updater}
-\end{figure}
-\end{frame}
-
-\begin{frame}
-\frametitle{Solution - the Planstep and Emotion Updater cont.}
-%planstep definitions: the 8 ps & 5 behaviours monitored
-A planstep update diagram
-\begin{figure}[htp]
-\centering
-\includegraphics[trim = 20mm 50mm 20mm 50mm, clip, width=0.8\textwidth]{fig/fig-planstep.pdf}
-\label{fig:planstep}
-\end{figure}
-\begin{itemize}
-\pause \item Eight plansteps: (0) ``off/dirty/dry'', (1) ``on/dirty/dry'', (2) ``off/soapy/dry'', (3) ``on/soapy/dry'', (4) ``on/clean/wet'', (5) ``off/clean/wet'', (6) ``on/clean/dry'', (7) ``off/clean/dry''
-\pause \item Five behaviours: A1 to A5 are ``turn on water'', ``put on soap'', ``rinse hands'', ``turn off water'', and ``use towel'', respectively.
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Solution - the Planstep and Emotion Updater cont.}
 %insert figure: the model & how emotional states are updated (explaining how the bayesact framework works in a specific app scenario)
 %note: there's a noise parameter describing the confidence of a certain result
 Use the BayesACT framework in the handwashing scenario
@@ -307,22 +237,7 @@ Use the BayesACT framework in the handwashing scenario
 \item Recall: BayesACT includes states $S = \{X, F, T\}$, observations $\Omega = \{\Omega_{x}, \Omega_{b}\}$, and agent actions $\{A, B_{a}\}$
 \pause \item In our hand-washing system, $X = \{X_{turn}, X_{ps}, X_{aw}, X_{bahav}\}$
 \pause \item $\Omega_{x}$ gives evidence to the system about $X$
-\pause \item $\Omega_{b}$ gives evidence to the system about $f_b$. The observation function $Pr(\Omega_b|f_b)$ allows one to specify the ``confidence'' or ``reliability'' of the different components of $\Omega_b$ by $\gamma$, which is the variance of a normal (Gaussian) distribution.
-\pause \item Compute $X_{ps}'$ based on observation $\Omega_{x}$ and $\{X_{ps}, X_{behav}, X_{aw}, F, T\}$
-\pause \item $A$ denotes the propositional content of a system message; $B_{a}$ denotes how the message should be expressed
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Solution - the Planstep and Emotion Updater cont.}
-%insert figure: the model & how emotional states are updated (explaining how the bayesact framework works in a specific app scenario)
-%note: there's a noise parameter describing the confidence of a certain result
-Use the BayesACT framework in the handwashing scenario
-\begin{itemize}
-\item Recall: BayesACT includes states $S = \{X, F, T\}$, observations $\Omega = \{\Omega_{x}, \Omega_{b}\}$, and agent actions $\{A, B_{a}\}$
-\pause \item In our hand-washing system, $X = \{X_{turn}, X_{ps}, X_{aw}, X_{bahav}\}$
-\pause \item $\Omega_{x}$ gives evidence to the system about $X$
-\pause \item $\Omega_{b}$ gives evidence to the system about $f_b$. The observation function $Pr(\Omega_b|f_b)$ allows one to specify the ``confidence'' or ``reliability'' of the different components of $\Omega_b$ by $\gamma$, which is the variance of a normal (Gaussian) distribution.
+\pause \item $\Omega_{b}$ gives evidence to the system about $f_b$. The ``confidence'' of $\Omega_b$ is specified by $\gamma$, which is the variance of a normal (Gaussian) distribution.
 \pause \item Compute $X_{ps}'$ based on observation $\Omega_{x}$ and $\{X_{ps}, X_{behav}, X_{aw}, F, T\}$
 \pause \item $A$ denotes the propositional content of a system message; $B_{a}$ denotes how the message should be expressed
 \end{itemize}
@@ -346,10 +261,6 @@ Use the BayesACT framework in the handwashing scenario
 \item The average distance the user's hands move between $n$ neighbouring frames is scaled to $A$
 \end{itemize}
 \pause \item Temporally smoothing in the Buffer
-\begin{equation}
-X=\sum_{k=i}^{j}(\dfrac{alpha}{alpha+1})^{j-k}*\dfrac{1}{alpha+1}*X[k]
-\end{equation}
-where $alpha \geq 0$, $X=P$ or $X=A$.
 \end{itemize}
 \end{frame}
 
@@ -634,6 +545,28 @@ I'd like to take this opportunity to thank:
 % put pages in assistance to answering questions here
 %---------------------------------------------------------------
 
+\begin{frame}
+\frametitle{Concepts - BayesACT cont.}
+Model formulation
+\begin{itemize}
+% ---- formula computing deflection ----
+\pause \item The deflection $\phi(F, T)$ between $F$ and $T$: 
+\begin{equation}\label{eq:eq_deflection}
+\phi(f,t) \propto e^{-(f'-t')\Sigma^{-1}(f-t)}
+\end{equation}
+% ---- formula computing probability of $f'$ ----
+\pause \item The probability of a post-action fundamental sentiment $f'$:
+\begin{equation}\label{eq:eq_pr_f}
+Pr(f'|f,t,x,b_{a},\phi) \propto e^{-\phi(f',t')-\xi(f',f,b_{a},x)} 
+\end{equation}
+where $t'$ can be computed from $\{f', t, x\}$ by empirically derived prediction equations of ACT.
+% ---- how the application progresses (i.e. how planstep changes in our case) ----
+\pause \item $Pr(x'|x,f',t',a)$: how the application progresses
+% ---- observation functions ----
+\pause \item $Pr(\omega_{b}|f)$ and $Pr(\omega_{x}|x)$: observation functions for the client behaviour sentiment and system state 
+\end{itemize}
+\end{frame}
+
 %pseudo-code page(1): how planstep is updated according to behavioural obs, awareness, & deflection
 \begin{frame}
 \frametitle{Update $X_{ps}'$ based on $\Omega_{x}$ and $\{X_{ps}, X_{behav}, X_{aw}, F, T\}$}
@@ -691,6 +624,24 @@ I'd like to take this opportunity to thank:
 % compile k
 \end{multicols}
 \end{algorithm}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Concepts - POMDP}
+Partially Observable Markov Decision Process (POMDP)
+\vspace{.3cm}
+\begin{columns}[c]
+\column{.5\textwidth}
+\includegraphics[trim = 45mm 20mm 30mm 50mm, clip, width=\textwidth]{fig/fig-pomdp-simple.pdf}
+\column{.5\textwidth}
+\begin{itemize}
+\item A timeslice of a POMDP process
+\item Variables: \{ $X$, $A$, $\mathbf{\Omega_{X}}$ \}
+\item $Pr : X \to \Delta(\mathbf{\Omega_{X}})$, $Pr : X \times A \to \Delta(\mathbf{X})$
+\item Reward Function: $R(A, X')$
+\end{itemize}
+\end{columns}
 \end{frame}
 
 \end{document} 
