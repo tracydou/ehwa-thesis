@@ -84,6 +84,7 @@
 \newcolumntype{V}[1]{>{\centering\arraybackslash} m{#1} }
 \newcolumntype{L}[1]{>{\arraybackslash} m{#1} }
 
+\usepackage{multicol}
 \pdfpageattr {/Group << /S /Transparency /I true /CS /DeviceRGB>>}%solves color issues brought by inserting pdf figures
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -429,5 +430,72 @@ Jesse Hoey
 % put pages in assistance to answering questions here
 %---------------------------------------------------------------
 
+%pseudo-code page(1): how planstep is updated according to behavioural obs, awareness, & deflection
+\begin{frame}
+\frametitle{Update $X_{ps}'$ based on $\Omega_{x}$ and $\{X_{ps}, X_{behav}, X_{aw}, F, T\}$}
+\begin{itemize}
+\item $SampleXVar()$ and $evalSampleXVar()$
+\item Pseudocode of $SampleXVar()$
+\end{itemize}
+\end{frame}
+
+%pseudo-code page(2): how planstep is updated according to behavioural obs, awareness, & deflection
+\begin{frame}
+\frametitle{Update $X_{ps}'$ based on $\Omega_{x}$ and $\{X_{ps}, X_{behav}, X_{aw}, F, T\}$ cont.}
+%----------------- second item -----------------
+\algsetup{linenosize=\scriptsize}
+\begin{algorithm}[H]
+\scriptsize
+\begin{multicols}{2}
+\begin{algorithmic}[1]
+\IF {Deflection(F, T) is high} \STATE {
+  threshold = high
+} \ELSE \STATE {
+  threshold = low
+} \ENDIF
+\IF {aw high} {
+  \IF {prompted} {
+    \IF{$random\_prob() <$ threshold} \STATE {
+       aw = low and not moving forward
+    } \ELSIF {prompt wrong} \STATE {
+       aw = low and not moving forward
+    } \ELSIF {likely} \STATE {
+       moving forward
+    } \ELSIF {$random\_prob() <$ threshold} \STATE {
+       aw = low and not moving forward
+    } \ENDIF
+  } \ELSE {
+    \IF {$random\_prob() <$ threshold} \STATE {
+      aw = low and not moving forward
+    } \ELSE \STATE {
+      aw stays high and moving forward
+    } \ENDIF
+  } \ENDIF
+} \ELSE {
+  \IF {prompted} {
+    \IF {$random\_prob() >$ threshold \AND prompt correct} \STATE {
+	move on and aw high
+    } \ELSE \STATE {
+        unlikely: aw high and not moving forward
+    } \ENDIF
+  } \ELSE \STATE {
+      unlikely: aw high and moving forward
+  } \ENDIF
+} \ENDIF
+\end{algorithmic}
+% compile k
+\end{multicols}
+\end{algorithm}
+\end{frame}
+
+%pseudo-code page(3): how planstep is updated according to behavioural obs, awareness, & deflection
+\begin{frame}
+\frametitle{Update $X_{ps}'$ based on $\Omega_{x}$ and $\{X_{ps}, X_{behav}, X_{aw}, F, T\}$ cont.}
+\begin{itemize}
+\item $SampleXVar()$ and $evalSampleXVar()$
+\item Pseudocode of $SampleXVar()$
+\pause \item $Pr: X_{behav} \to \Delta(\Omega_{x})$ used in $evalSampleXVar()$
+\end{itemize}
+\end{frame}
 
 \end{document} 
