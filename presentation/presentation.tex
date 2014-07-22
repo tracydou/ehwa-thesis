@@ -81,10 +81,11 @@
 \usepackage{array}
 
 \usepackage{algorithm,algorithmic}
+\usepackage{multicol}
+\usepackage{caption,subcaption}
 \newcolumntype{V}[1]{>{\centering\arraybackslash} m{#1} }
 \newcolumntype{L}[1]{>{\arraybackslash} m{#1} }
 
-\usepackage{multicol}
 \pdfpageattr {/Group << /S /Transparency /I true /CS /DeviceRGB>>}%solves color issues brought by inserting pdf figures
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -311,29 +312,147 @@ Use the BayesACT framework in the handwashing scenario
 \end{frame}
 
 \begin{frame}
-\frametitle{Solution - the EPA-Calculator}
-%feature selection (other feature-selection approaches are not feasible in current situation)
-%describe the threshold-based method (i.e. piecewise linear interpolation)
+\frametitle{Solution - the Planstep and Emotion Updater cont.}
+%insert figure: the model & how emotional states are updated (explaining how the bayesact framework works in a specific app scenario)
+%note: there's a noise parameter describing the confidence of a certain result
+Use the BayesACT framework in the handwashing scenario
+\begin{itemize}
+\item Recall: BayesACT includes states $S = \{X, F, T\}$, observations $\Omega = \{\Omega_{x}, \Omega_{b}\}$, and agent actions $\{A, B_{a}\}$
+\pause \item In our hand-washing system, $X = \{X_{turn}, X_{ps}, X_{aw}, X_{bahav}\}$
+\pause \item $\Omega_{x}$ gives evidence to the system about $X$
+\pause \item $\Omega_{b}$ gives evidence to the system about $f_b$. The observation function $Pr(\Omega_b|f_b)$ allows one to specify the ``confidence'' or ``reliability'' of the different components of $\Omega_b$ by $\gamma$, which is the variance of a normal (Gaussian) distribution.
+\pause \item Compute $X_{ps}'$ based on observation $\Omega_{x}$ and $\{X_{ps}, X_{behav}, X_{aw}, F, T\}$
+\pause \item $A$ denotes the propositional content of a system message; $B_{a}$ denotes how the message should be expressed
+\end{itemize}
 \end{frame}
 
 \begin{frame}
+\frametitle{Solution - the EPA-Calculator}
+\begin{itemize}
+\item Essentially an ``Affect Recognition'' problem
+\item Learns/ Calculates affective interpretations from user behaviours
+%feature selection (other feature-selection approaches are not feasible in current situation)
+\pause \item Feature Selection
+\begin{itemize}
+\item analysis on facial expressions and speeches
+\item application scenario and user-group constraints
+\end{itemize}
+%describe the threshold-based method (i.e. piecewise linear interpolation)
+\pause \item Calculate $P,A$ using piecewise linear interpolation method
+\begin{itemize}
+\item The average distance between the user's two hands in a set of $n$ neighbouring frames is scaled to $P$
+\item The average distance the user's hands move between $n$ neighbouring frames is scaled to $A$
+\end{itemize}
+\pause \item Temporally smoothing in the Buffer
+\begin{equation}
+X=\sum_{k=i}^{j}(\dfrac{alpha}{alpha+1})^{j-k}*\dfrac{1}{alpha+1}*X[k]
+\end{equation}
+where $alpha \geq 0$, $X=P$ or $X=A$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
 \frametitle{Solution - the Observer}
+\begin{itemize}
 %state how the original hand-tracker works
-%state how the server-client model is used
+\item Step 1: Get the locations of the user's hands
+\begin{itemize}
+\item utilize Czarnuch and Mihailidis's body tracker \cite{czarnuch2014}
+\item the tracker obtains body parts locations from the depth information of images taken from an overhead perspective
+\item the tracker was trained using partially labeled, unbalanced data, and is configurable and re-trainable\\
+\pause
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.9\linewidth]{fig/handtracker-performance.png}
+\end{figure}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solution - the Observer cont.}
+\begin{itemize}
+\item Step 1: Get the locations of the user's hands
+\begin{itemize}
+\item utilize Czarnuch and Mihailidis's body tracker \cite{czarnuch2014}
+\item the tracker obtains body parts locations from the depth information of images taken from an overhead perspective
+\item the tracker was trained using partially labeled, unbalanced data, and is configurable and re-trainable
+\end{itemize}
+\item Step 2: Map locations to user behaviours
+\begin{itemize}
+\item compare hands locations with object positions
+\item objects: the left-tap, the right-tap, the soap, the water-flow, the towel
+\item observation noise handled by the observation function in the Reasoning Engine
+\end{itemize}
+%state the server-client model is used
+\pause \item Serves as an Observer server
+\begin{itemize}
+\item with the help of the Buffer
+\end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Solution - the Output Part}
-%describe the survey - play two videos here: examples of the prompts
+\begin{itemize}
+%describe the survey - insert figure: examples of the prompts
+\item The prompt dataset: the audio-visual prompts generated and evaluated in Malhotra's study \cite{malhotra2014}
+\begin{itemize}
+\item created 30 video clips using the USC Virtual Human Toolkit
+\item EPA values of videos evaluated by human raters
+\item the participants' answers are consistent with each other
+\end{itemize}
+%figure: Screenshots of two video prompts stating same propositional messages
+\begin{figure}[htb]
+\centering
+\begin{subfigure}[b]{.4\textwidth}
+\includegraphics[width=\textwidth]{fig/prompt1.jpg}
+\end{subfigure}
+\begin{subfigure}[b]{.4\textwidth}
+\includegraphics[width=\textwidth]{fig/prompt2.jpg}
+\end{subfigure}
+\end{figure}
 %describe how to select (include formula defining the distance of prompts)
+\pause
+\item A proper prompt is selected as the final prompt if it:
+\begin{itemize}
+\item has the same propositional labels as the desired prompt
+\item has the closest emotional (EPA) values as the desired prompt
+\end{itemize}
+\end{itemize}
 \end{frame}
 
 %------------------------------------------------
 \subsection{Coordination between components}
+
 \begin{frame}
-\frametitle{Solution - the Buffer}
-%the position: between the EPA-Calc & Observer and the Reasoning Engine
-%functionality of the buffer: control timings & smoothing values
+\frametitle{Solution - Coordination between components}
+\begin{itemize}
+\item The system is designed with independent components.
+\begin{figure}
+\centering
+\includegraphics[trim = 5mm 35mm 5mm 20mm, clip, width=.8\linewidth]{fig/fig-system-overview.pdf}
+\end{figure}
+%state the server-client model is used & a "buffer" component is involved
+\item How to coordinate between the components?
+\begin{itemize}
+\item timings of sending request and response messages?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solution - The Buffer}
+\begin{itemize}
+\item Between the Observer, the EPA-Calc, and the Reasoning Engine
+\item Controls timings of sending messages
+\begin{figure}
+\centering
+\includegraphics[trim = 10mm 25mm 16mm 15mm, clip, width=0.75\linewidth]{fig/fig-state-trans.pdf}
+\end{figure}
+\item Smoothes EPA values calucated by the Calculator
+\end{itemize}
 \end{frame}
 
 %-----------------------------------------------------------------
