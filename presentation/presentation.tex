@@ -246,21 +246,21 @@ Use the BayesACT framework in the handwashing scenario
 \begin{frame}
 \frametitle{Solution - the EPA-Calculator}
 \begin{itemize}
-\item Essentially an ``Affect Recognition'' problem
-\item Learns/ Calculates affective interpretations from user behaviours
+\item Calculates affective interpretations from user behaviours
 %feature selection (other feature-selection approaches are not feasible in current situation)
+\vspace{.3cm}
 \pause \item Feature Selection
 \begin{itemize}
 \item analysis on facial expressions and speeches
 \item application scenario and user-group constraints
 \end{itemize}
 %describe the threshold-based method (i.e. piecewise linear interpolation)
+\vspace{.3cm}
 \pause \item Calculate $P,A$ using piecewise linear interpolation method
 \begin{itemize}
 \item The average distance between the user's two hands in a set of $n$ neighbouring frames is scaled to $P$
 \item The average distance the user's hands move between $n$ neighbouring frames is scaled to $A$
 \end{itemize}
-\pause \item Temporally smoothing in the Buffer
 \end{itemize}
 \end{frame}
 
@@ -297,11 +297,6 @@ Use the BayesACT framework in the handwashing scenario
 \item compare hands locations with object positions
 \item objects: the left-tap, the right-tap, the soap, the water-flow, the towel
 \item observation noise handled by the observation function in the Reasoning Engine
-\end{itemize}
-%state the server-client model is used
-\pause \item Serves as an Observer server
-\begin{itemize}
-\item with the help of the Buffer
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -372,46 +367,16 @@ Use the BayesACT framework in the handwashing scenario
 \section{Experimental Results}
 %-----------------------------------------------------------
 \begin{frame}
-\frametitle{Experiments - Parameter values used in laboratory experiments}
-%table: Parameter values used in laboratory experiments - explain the meanings of all the parameters
-\begin{table}
-\small
-\centering
-\begin{tabular}{| l | l | l |}
-\hline
-\textbf{Param.} & \textbf{Value} & \textbf{Defined in which component} \\ \hline
-$n$ & $10$ & EPA-Calc \\ \hline
-$distance$ & $\{-\infty, 0, 8, 40, 128, 160, +\infty\}$ & EPA-Calc \\ \hline
-$potency$ & $\{-4.3, -4.3, 0, 1, 2, 4.3, 4.3\}$ & EPA-Calc  \\ \hline 
-$difference$ & $\{-\infty, 0, 3.5, 17.5, 35, 70, +\infty\}$ & EPA-Calc \\ \hline
-$activity$ & $\{-4.3, -4.3, -2, -1, 0, 4.3, 4.3\}$ & EPA-Calc\\ \hline
-$alpha$ & $0$ & Buffer \\ \hline
-$timeout$ & $300$ & Buffer \\ \hline
-$timeup$ & $1$ & Buffer \\ \hline
-$\beta_{a}^{0}$ & $0.001$ & Updater \\ \hline
-$\beta_{c}^{0}$ & $2.0$ & Updater \\ \hline
-$\gamma$ & $(100000, 1.0, 0.5)$ & Updater\\ \hline
-$N$ & $2000$ & Updater \\ \hline
-$f_a^{0}$ & $[1.5, 0.51, 0.45]$ & Updater \\ \hline
-$f_c^{0}$ & Different in each test &Updater \\ \hline
-\end{tabular}
-\end{table}
-\end{frame}
-
-
-\begin{frame}
 \frametitle{Experiments - Latency of the system}
-Experiments conducted on the system show that an average latency of 
+Average latency of the system
 \begin{itemize} 
-\item 46.79ms is caused by the Observer component of the system
-\item 0.009ms caused by the Buffer
-\item 1.65s caused by the Updater
+\item 46.80ms for obtaining user behaviours
+\item 1.65s for calculating and updating functional and emotional beliefs
+\item 1.70s in total
 \end{itemize}
 \vspace{.3cm}
-The overall average latency of the system is around 1.70s: \\
-the system runs in real-time from the perspective of its user group
+The system runs in real-time from the perspective of its user group
 \end{frame}
-
 
 \begin{frame}
 \frametitle{Experiments - Two laboratory tests}
@@ -643,5 +608,35 @@ Partially Observable Markov Decision Process (POMDP)
 \end{itemize}
 \end{columns}
 \end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Experiments - Parameter values used in laboratory experiments}
+%table: Parameter values used in laboratory experiments - explain the meanings of all the parameters
+\begin{table}
+\small
+\centering
+\begin{tabular}{| l | l | l |}
+\hline
+\textbf{Param.} & \textbf{Value} & \textbf{Defined in which component} \\ \hline
+$n$ & $10$ & EPA-Calc \\ \hline
+$distance$ & $\{-\infty, 0, 8, 40, 128, 160, +\infty\}$ & EPA-Calc \\ \hline
+$potency$ & $\{-4.3, -4.3, 0, 1, 2, 4.3, 4.3\}$ & EPA-Calc  \\ \hline 
+$difference$ & $\{-\infty, 0, 3.5, 17.5, 35, 70, +\infty\}$ & EPA-Calc \\ \hline
+$activity$ & $\{-4.3, -4.3, -2, -1, 0, 4.3, 4.3\}$ & EPA-Calc\\ \hline
+$alpha$ & $0$ & Buffer \\ \hline
+$timeout$ & $300$ & Buffer \\ \hline
+$timeup$ & $1$ & Buffer \\ \hline
+$\beta_{a}^{0}$ & $0.001$ & Updater \\ \hline
+$\beta_{c}^{0}$ & $2.0$ & Updater \\ \hline
+$\gamma$ & $(100000, 1.0, 0.5)$ & Updater\\ \hline
+$N$ & $2000$ & Updater \\ \hline
+$f_a^{0}$ & $[1.5, 0.51, 0.45]$ & Updater \\ \hline
+$f_c^{0}$ & Different in each test &Updater \\ \hline
+\end{tabular}
+\end{table}
+\end{frame}
+
+
 
 \end{document} 
