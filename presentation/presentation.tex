@@ -83,6 +83,7 @@
 \usepackage{algorithm,algorithmic}
 \usepackage{multicol}
 \usepackage{caption,subcaption}
+\usepackage{longtable}
 \newcolumntype{V}[1]{>{\centering\arraybackslash} m{#1} }
 \newcolumntype{L}[1]{>{\arraybackslash} m{#1} }
 
@@ -112,7 +113,7 @@ University of Waterloo \\ % Your institution for the title page
 \end{frame}
 
 \begin{frame}
-\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\frametitle{Agenda} % Table of contents slide, comment this block out to remove it
 \tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
 \end{frame}
 
@@ -175,6 +176,7 @@ Affect Control Theory (ACT)
 \pause \item ``fundamentals'' of identities and behaviours; shared between people within a same culture
 \pause \item ``transient impressions'': emotional feelings of people evoked by a specific event
 \end{itemize}
+\pause
 \begin{block}{The ACT Principal}
 Actors work to experience transient impressions that are consistent with their fundamental sentiments.
 \end{block}
@@ -226,7 +228,7 @@ Partially Observable Markov Decision Process (POMDP)
 
 \begin{frame}
 \frametitle{Concepts - BayesACT cont.}
-Updates $F$ and Calculates $\{A, B_{a}\}$ basing on $\{F, T, X\}$
+Model formulation
 \begin{itemize}
 % ---- formula computing deflection ----
 \pause \item The deflection $\phi(F, T)$ between $F$ and $T$: 
@@ -446,12 +448,12 @@ where $alpha \geq 0$, $X=P$ or $X=A$.
 \frametitle{Solution - The Buffer}
 \begin{itemize}
 \item Between the Observer, the EPA-Calc, and the Reasoning Engine
-\item Controls timings of sending messages
+\pause \item Controls timings of sending messages
 \begin{figure}
 \centering
 \includegraphics[trim = 10mm 25mm 16mm 15mm, clip, width=0.75\linewidth]{fig/fig-state-trans.pdf}
 \end{figure}
-\item Smoothes EPA values calucated by the Calculator
+\pause \item Smoothes EPA values calucated by the Calculator
 \end{itemize}
 \end{frame}
 
@@ -459,44 +461,93 @@ where $alpha \geq 0$, $X=P$ or $X=A$.
 \section{Experimental Results}
 %-----------------------------------------------------------
 \begin{frame}
-\frametitle{Experiments - Variables and Parameters}
-%locations of "certain objects": related to the 5 behaviours (give a screenshot of the physical settings; or mention would give)
+\frametitle{Experiments - Parameter values used in laboratory experiments}
+%table: Parameter values used in laboratory experiments - explain the meanings of all the parameters
+\begin{table}
+\small
+\centering
+\begin{tabular}{| l | l | l |}
+\hline
+\textbf{Param.} & \textbf{Value} & \textbf{Defined in which component} \\ \hline
+$n$ & $10$ & EPA-Calc \\ \hline
+$distance$ & $\{-\infty, 0, 8, 40, 128, 160, +\infty\}$ & EPA-Calc \\ \hline
+$potency$ & $\{-4.3, -4.3, 0, 1, 2, 4.3, 4.3\}$ & EPA-Calc  \\ \hline 
+$difference$ & $\{-\infty, 0, 3.5, 17.5, 35, 70, +\infty\}$ & EPA-Calc \\ \hline
+$activity$ & $\{-4.3, -4.3, -2, -1, 0, 4.3, 4.3\}$ & EPA-Calc\\ \hline
+$alpha$ & $0$ & Buffer \\ \hline
+$timeout$ & $300$ & Buffer \\ \hline
+$timeup$ & $1$ & Buffer \\ \hline
+$\beta_{a}^{0}$ & $0.001$ & Updater \\ \hline
+$\beta_{c}^{0}$ & $2.0$ & Updater \\ \hline
+$\gamma$ & $(100000, 1.0, 0.5)$ & Updater\\ \hline
+$N$ & $2000$ & Updater \\ \hline
+$f_a^{0}$ & $[1.5, 0.51, 0.45]$ & Updater \\ \hline
+$f_c^{0}$ & Different in each test &Updater \\ \hline
+\end{tabular}
+\end{table}
 \end{frame}
 
-\begin{frame}
-\frametitle{Experiments - Variables and Parameters cont.}
-%table defining all the parameters - explain the meanings of all the parameters
-\end{frame}
 
 \begin{frame}
-\frametitle{Experiments - Test \#1}
-%table 1 + video 1: what happened in run 1
+\frametitle{Experiments - Latency of the system}
+Experiments conducted on the system show that an average latency of 
+\begin{itemize} 
+\item 46.79ms is caused by the Observer component of the system
+\item 0.009ms caused by the Buffer
+\item 1.65s caused by the Updater
+\end{itemize}
+\vspace{.3cm}
+The overall average latency of the system is around 1.70s: \\
+the system runs in real-time from the perspective of its user group
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Experiments - Two laboratory tests}
+%what happened in the two runs
 %explanation focus on planstep responses
 %mention emotional responses in general
-\end{frame}
-
-\begin{frame}
-\frametitle{Experiments - Test \#1 cont.}
-%(if needed) table 1 + video 1: what happened in run 1
-\end{frame}
-
-\begin{frame}
-\frametitle{Experiments - Test \#2}
-%video 2 + table 2: what happened in run 2
-%explanation focus on planstep responses
-%mention emotional responses in general
-\end{frame}
-
-\begin{frame}
-\frametitle{Experiments - Test \#2 cont.}
-%(if needed) table 2: what happened in run 2
+Two laboratory tests
+\begin{itemize}
+\item link to test \#1
+\item link to test \#2
+\end{itemize}
+\vspace{.3cm}
+Another 15 tests were also run. Results are in the Appendix.
 \end{frame}
 
 \begin{frame}
 \frametitle{Experiments - Conclusion}
-%planstep updater - they can update accordingly
-%emotion updater - insert table & state the correlations found between EPA values
 %mention that more experiments were run & result is in the appendix 
+\begin{itemize}
+%planstep updater - they can update accordingly
+\item Functionality performance
+\begin{itemize}
+\item sometimes false positively recognizes an user behaviour
+\item is able to produce propositionally useful system prompts in general
+\end{itemize}
+%emotion updater - insert table & state the correlations found between EPA values
+\pause
+\item Emotionality performance
+% table: Comparison of EPA values in the two tests
+\begin{table}
+\scriptsize
+\centering
+\begin{tabular}{|  p{0.3cm} | p{1.8cm} |  p{2.5cm} |  p{2.5cm} | p{2cm} |}
+\hline
+No. & mean of behav. & init of $f_c$ & mean of $f_c$ & mean of prompt \\ \hline
+\#1 & $[0,1.32,-1.3]$ & $[1.61,0.84,-0.87]$ &  $[2.8,1.03,-0.73]$ & $[1.62,0.32,0.75]$ \\ \hline
+\#2 & $[0,0.77,-1.74]$ & $[-0.64,-0.43,-1.81]$ & $[1.13,-0.43,-1.47]$ & $[1.53,0.66,0.08]$ \\ \hline
+\end{tabular}
+\end{table}
+\pause
+Generally, for tests the actor acted more powerfully and more actively:
+\begin{itemize}
+\item larger $P$ and larger $A$ values were computed for user behaviours
+\item larger $P$ and larger $A$ values were achieved for $f_c$'s
+\item smaller $P$ and larger $A$ values were produced for prompts, among which the differences between $A$ values are more obvious
+\end{itemize}
+\end{itemize}
 \end{frame}
 
 %-----------------------------------------------------------------
@@ -507,30 +558,64 @@ where $alpha \geq 0$, $X=P$ or $X=A$.
 \begin{frame}
 \frametitle{Discussion - Contribution}
 %review the four objectives
+Recall - Objective of this thesis
+\begin{itemize}
+\item is designed in a portable and extensible way
+\item runs in real-time from the perspective of the user group
+\item provides at least a level of functional assistance of as high quality as the COACH
+\item is able to tune the prompts in some way according to the emotional state of a user
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Discussion - Contribution cont.}
 %state contribution of this paper
+Contribution
+\begin{itemize}
+\pause \item Reviewed previous work in all the four aspects of emotional intelligence
+\pause \item Designed and implemented a prototypical hand-washing system that
+\begin{itemize}
+\item is extensible and portable
+\item runs in real-time from the perspective of the user group
+\item provides a level of functional assistance
+\item produces system prompts that have encoded to some extent the emotional state of the user
+\end{itemize}
+\pause \item Tests also indicated that user behaviours with higher $P$ and higher $A$ values may lead to $f_c$ 's with higher $P$ and higher $A$ values and system prompts with lower $P$ and higher $A$ values
+\end{itemize}
 \end{frame}
 
 \subsection{Future Work}
 \begin{frame}
 \frametitle{Discussion - Future Work}
-
+Future Work
+\begin{itemize}
+\item{Improve the EPA-Calculator}
+\item{Improve the prompt generation process}
+\item{Improve the Planstep- and Emotion- Updater}
+\item{Conduct clinical trials for the system}
+\end{itemize}
 \end{frame}
 
 %---------------------------------------------------------------
 % Ending pages
 %---------------------------------------------------------------
 \begin{frame}
-\frametitle{References}
-[1] The bayesact paper
-\newline [2] The tracker paper.
-\newline [3] The survey paper.
-\end{frame}
-%------------------------------------------------
-\begin{frame}
 \frametitle{Acknowledgement}
-Jesse Hoey
-\newline James Tung and Peter van Beek
-\newline Xiao Yang, Chengbo Li and Enxun Wei
+This work is based on previous works of:
+\begin{itemize}
+\item [1] The bayesact paper
+\item [2] The tracker paper.
+\item [3] The survey paper.
+\end{itemize}
+\vspace{0.3cm}
+I'd like to take this opportunity to thank:
+\begin{itemize}
+\item Jesse Hoey
+\item James Tung and Peter van Beek
+\item Xiao Yang, Chengbo Li and Enxun Wei
+\item My family and friends
+\end{itemize}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
@@ -554,7 +639,8 @@ Jesse Hoey
 \frametitle{Update $X_{ps}'$ based on $\Omega_{x}$ and $\{X_{ps}, X_{behav}, X_{aw}, F, T\}$}
 \begin{itemize}
 \item $SampleXVar()$ and $evalSampleXVar()$
-\item Pseudocode of $SampleXVar()$
+\item Pseudocode of $SampleXVar()$ (on next page)
+\item $Pr: X_{behav} \to \Delta(\Omega_{x})$ used in $evalSampleXVar()$
 \end{itemize}
 \end{frame}
 
@@ -605,16 +691,6 @@ Jesse Hoey
 % compile k
 \end{multicols}
 \end{algorithm}
-\end{frame}
-
-%pseudo-code page(3): how planstep is updated according to behavioural obs, awareness, & deflection
-\begin{frame}
-\frametitle{Update $X_{ps}'$ based on $\Omega_{x}$ and $\{X_{ps}, X_{behav}, X_{aw}, F, T\}$ cont.}
-\begin{itemize}
-\item $SampleXVar()$ and $evalSampleXVar()$
-\item Pseudocode of $SampleXVar()$
-\pause \item $Pr: X_{behav} \to \Delta(\Omega_{x})$ used in $evalSampleXVar()$
-\end{itemize}
 \end{frame}
 
 \end{document} 
