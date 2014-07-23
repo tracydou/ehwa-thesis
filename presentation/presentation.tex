@@ -189,18 +189,18 @@ Actors work to experience transient impressions that are consistent with their f
 \item Note: $F_{c}$ denotes the agent's belief of the client's identity
 \item Observations $\Omega = \{\Omega_{X}, \Omega_{b}\}$
 \item Actions $\{A, B_{a}\}$
-\item Calculate $\{A, B_{a}\}$ basing on $\{F, T, X\}$
+\item Calculate $\{A, B_{a}\}$ based on $\{F, T, X\}$
 \end{itemize}
 \end{columns}
 \end{frame}
 
 
 %-----------------------------------------------------------------
-\section{Solution: System Design}
+\section{System Design}
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Solution - Overview}
+\frametitle{Design - Overview}
 %insert figure describing the functionality of each component of the system
 %state how each component is related to our objective
 \begin{figure}
@@ -213,7 +213,7 @@ Actors work to experience transient impressions that are consistent with their f
 
 %------------------------------------------------
 \begin{frame}
-\frametitle{Solution - the Planstep and Emotion Updater}
+\frametitle{Design - the Planstep and Emotion Updater}
 %insert figure: the model & how emotional states are updated (explaining how the bayesact framework works in a specific app scenario)
 %note: there's a noise parameter describing the confidence of a certain result
 Use the BayesACT framework in the handwashing scenario
@@ -222,13 +222,13 @@ Use the BayesACT framework in the handwashing scenario
 \pause \item In our hand-washing system, $X = \{X_{turn}, X_{ps}, X_{aw}, X_{bahav}\}$
 \pause \item Observations give evidence to the state variables
 \item Note: the ``confidence'' of $\Omega_b$ can be specified by $\gamma$, which is the variance of a normal (Gaussian) distribution.
-\pause \item Compute $X_{ps}'$ based on observation $\Omega_{x}$ and $\{X_{ps}, X_{behav}, X_{aw}, F, T\}$
-\pause \item $A$ denotes the propositional content of a system message; $B_{a}$ denotes how the message should be expressed
+\pause \item Compute $X_{ps}'$ based on $\Omega_{x}$, $\Omega_{b}$ and $\{X, F, T\}$
+\pause \item Calculate $\{A, B_{a}\}$ based on $\{F, T, X\}$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Solution - the EPA-Calculator}
+\frametitle{Design - the EPA-Calculator}
 \begin{itemize}
 \item Calculates affective meanings of user behaviours
 %feature selection (other feature-selection approaches are not feasible in current situation)
@@ -251,14 +251,14 @@ Use the BayesACT framework in the handwashing scenario
 
 
 \begin{frame}
-\frametitle{Solution - the Observer}
+\frametitle{Design - the Observer}
 \begin{itemize}
 %state how the original hand-tracker works
 \item Step 1: Get the locations of the user's hands
 \begin{itemize}
-\item utilize Czarnuch and Mihailidis's body tracker \cite{czarnuch2014}
-\item the tracker obtains body parts locations from the depth information of images taken from an overhead perspective
-\item the tracker was trained using partially labeled, unbalanced data, and is configurable and re-trainable\\
+\item bases on a body tracker implemented in previous work
+\item obtains locations of body parts from depth images taken from an overhead perspective
+\item was trained using partially labeled, unbalanced data, and is configurable and re-trainable
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.9\linewidth]{fig/handtracker-performance.png}
@@ -268,15 +268,8 @@ Use the BayesACT framework in the handwashing scenario
 \end{frame}
 
 \begin{frame}
-\frametitle{Solution - the Observer}
+\frametitle{Design - the Observer}
 \begin{itemize}
-\item Step 1: Get the locations of the user's hands
-\begin{itemize}
-\item use a body tracker implemented in previous work
-\item the tracker obtains body parts locations from the depth information of images taken from an overhead perspective
-\item the tracker was trained using partially labeled, unbalanced data, and is configurable and re-trainable
-\end{itemize}
-\vspace{.3cm}
 \item Step 2: Map locations to user behaviours
 \begin{itemize}
 \item if hands are close to an object, then there's high probability of performing the behaviour corresponded to the object
@@ -287,14 +280,14 @@ Use the BayesACT framework in the handwashing scenario
 \end{frame}
 
 \begin{frame}
-\frametitle{Solution - the Prompt Selector and Player}
+\frametitle{Design - the Prompt Selector and Player}
 \begin{itemize}
 %describe the survey - insert figure: examples of the prompts
-\item The prompt dataset: 30 audio-visual prompts generated and evaluated in previous study
+\item The prompt dataset 
 \begin{itemize}
+\item 30 audio-visual prompts generated in previous study
 \item created using the USC Virtual Human Toolkit
 \item EPA values of videos evaluated by human raters
-\item the participants' answers are consistent with each other
 \end{itemize}
 %figure: Screenshots of two video prompts stating same propositional messages
 \begin{figure}[htb]
@@ -312,20 +305,6 @@ Use the BayesACT framework in the handwashing scenario
 \item has the same propositional labels as the desired prompt
 \item has the closest emotional (EPA) values as the desired prompt
 \end{itemize}
-\end{itemize}
-\end{frame}
-
-%------------------------------------------------
-\begin{frame}
-\frametitle{Solution - The Buffer}
-\begin{itemize}
-\item Between the Observer, the EPA-Calc, and the Reasoning Engine
-\item Controls timings of sending messages
-\begin{figure}
-\centering
-\includegraphics[trim = 10mm 25mm 16mm 15mm, clip, width=0.75\linewidth]{fig/fig-state-trans.pdf}
-\end{figure}
-\item Smoothes EPA values calucated by the Calculator
 \end{itemize}
 \end{frame}
 
@@ -376,17 +355,16 @@ Another 15 tests were also run. Results are in the Appendix.
 \centering
 \begin{tabular}{|  p{0.3cm} | p{1.8cm} |  p{2.5cm} |  p{2.5cm} | p{2cm} |}
 \hline
-No. & mean of behav. & init of $f_c$ & mean of $f_c$ & mean of prompt \\ \hline
+No. & mean of behav. & init of client identities & mean of client identities & mean of prompt \\ \hline
 \#1 & $[0,1.32,-1.3]$ & $[1.61,0.84,-0.87]$ &  $[2.8,1.03,-0.73]$ & $[1.62,0.32,0.75]$ \\ \hline
 \#2 & $[0,0.77,-1.74]$ & $[-0.64,-0.43,-1.81]$ & $[1.13,-0.43,-1.47]$ & $[1.53,0.66,0.08]$ \\ \hline
 \end{tabular}
 \end{table}
 \vspace{.3cm}
-Generally, for tests the actor acted more powerfully and more actively:
+Generally, user behaviours with higher $P$ and higher $A$ values may lead to
 \begin{itemize}
-\item larger $P$ and larger $A$ values were computed for user behaviours
-\item larger $P$ and larger $A$ values were achieved for $f_c$'s
-\item smaller $P$ and larger $A$ values were produced for prompts, among which the differences between $A$ values are more obvious
+\item client identities with higher $P$ and higher $A$ values
+\item system prompts with lower $P$ and higher $A$ values
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -395,30 +373,16 @@ Generally, for tests the actor acted more powerfully and more actively:
 \section{Discussion}
 %-----------------------------------------------------------
 
-\subsection{Contribution}
 \begin{frame}
-\frametitle{Discussion - Contribution}
+\frametitle{Discussion}
 %state contribution of this paper
 Contribution
-\vspace{.3cm}
 \begin{itemize}
-\item Designed and implemented a prototypical hand-washing system that
-\begin{itemize}
-\item is extensible and portable
-\item runs in real-time from the perspective of the user group
-\item provides a level of functional assistance
-\item produces system prompts that have encoded to some extent the emotional state of the user
+\item Designed and implemented a prototypical hand-washing system that satisfies the objectives
+\item Tests also indicated a correlation between the EPA values of user behaviours, user identities, and system prompts
 \end{itemize}
 \vspace{.3cm}
-\item Tests also indicated that user behaviours with higher $P$ and higher $A$ values may lead to $f_c$ 's with higher $P$ and higher $A$ values and system prompts with lower $P$ and higher $A$ values
-\end{itemize}
-\end{frame}
-
-\subsection{Future Work}
-\begin{frame}
-\frametitle{Discussion - Future Work}
 Future Work
-\vspace{.3cm}
 \begin{itemize}
 \item{Improve the EPA-Calculator}
 \item{Improve the prompt generation process}
@@ -434,17 +398,19 @@ Future Work
 \frametitle{Acknowledgement}
 This work is based on previous works of:
 \begin{itemize}
-\item [1] The bayesact paper
-\item [2] The tracker paper.
-\item [3] The survey paper.
+\footnotesize{
+\item Hoey, J., Schroder, T., \& Alhothali, A. (2013, September). Bayesian affect control theory. In Affective Computing and Intelligent Interaction (ACII), 2013 Humaine Association Conference on (pp. 166-172). IEEE.
+\item Czarnuch, S., \& Mihailidis, A. (2014 (in review)). Depth image hand tracking from an overhead perspective using partially labeled, unbalanced data: Development and real-world testing. IEEE Journal of Biomedical and Health Informatics.
+\item Malhotra, A., Yu, C., Schr¨oder, T., \& Hoey, J. (2014 (in review)). An exploratory study into the use of an emotionally aware cognitive assistant.
+}
 \end{itemize}
 \vspace{0.3cm}
 I'd like to take this opportunity to thank:
 \begin{itemize}
 \item Jesse Hoey
 \item James Tung and Peter van Beek
-\item Xiao Yang, Chengbo Li and Enxun Wei
-\item My family and friends
+\item Chengbo Li, Xiao Yang and Enxun Wei
+\item My families and friends
 \end{itemize}
 \end{frame}
 %------------------------------------------------
@@ -580,6 +546,20 @@ Planstep Definition and Update Diagram
 \end{itemize}
 \end{frame}
 
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Solution - The Buffer}
+\begin{itemize}
+\item Between the Observer, the EPA-Calc, and the Reasoning Engine
+\item Controls timings of sending messages
+\begin{figure}
+\centering
+\includegraphics[trim = 10mm 25mm 16mm 15mm, clip, width=0.75\linewidth]{fig/fig-state-trans.pdf}
+\end{figure}
+\item Smoothes EPA values calucated by the Calculator
+\end{itemize}
+\end{frame}
 
 %------------------------------------------------
 \begin{frame}
