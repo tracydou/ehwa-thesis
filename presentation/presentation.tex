@@ -160,13 +160,14 @@ To augment the COACH system with an emotional reasoning engine so that the augme
 \frametitle{Concepts - ACT}
 Affect Control Theory (ACT)
 \begin{itemize}
-\item represents emotions as EPA vectors
+\item represents emotions as EPA vectors, where E stands for ``evaluation'', P stands for ``potency'',
+and A stands for ``activity''
 \item describes social events by an Actor-Behaviour-Object grammar
 \item ``fundamentals'' of identities and behaviours; shared between people within a same culture
 \item ``transient impressions'': emotional feelings caused by a specific event
 \end{itemize}
 \pause
-\begin{block}{The ACT Principal}
+\begin{block}{The ACT Principle}
 Actors work to experience transient impressions that are consistent with their fundamental sentiments.
 \end{block}
 \end{frame}
@@ -178,6 +179,7 @@ Actors work to experience transient impressions that are consistent with their f
 \begin{itemize}
 \item A Bayesian version of the ACT theory
 \item Extends the ACT with POMDP model
+\item Uses a ``turn-taking'' model and represents state variables for Agent, Behaviour and Client (ABC)
 \end{itemize}
 %insert figure & explain the bayesact framework
 \begin{columns}[c]
@@ -185,11 +187,11 @@ Actors work to experience transient impressions that are consistent with their f
 \includegraphics[trim = 20mm 10mm 20mm 10mm, clip, width=\linewidth]{fig/fig-bayesact.pdf}
 \column{.5\textwidth}
 \begin{itemize}
-\item States $S = \{F, T, X\}$, where $F = \{F_{ij}\}, T = \{T_{ij}\}, i \in \{a, b, c\}, j \in \{e, p, a\}$
+\item States $S = \{X, F, T\}$, where $F = \{F_{ij}\}, T = \{T_{ij}\}, i \in \{a, b, c\}, j \in \{e, p, a\}$
 \item Note: $F_{c}$ denotes the agent's belief of the client's identity
 \item Observations $\Omega = \{\Omega_{X}, \Omega_{b}\}$
 \item Actions $\{A, B_{a}\}$
-\item Calculate $\{A, B_{a}\}$ based on $\{F, T, X\}$
+\item Calculate $\{A, B_{a}\}$ based on $\{X, F, T\}$
 \end{itemize}
 \end{columns}
 \end{frame}
@@ -219,11 +221,11 @@ Actors work to experience transient impressions that are consistent with their f
 Use the BayesACT framework in the handwashing scenario
 \begin{itemize}
 \item Recall: BayesACT includes states $S = \{X, F, T\}$, observations $\Omega = \{\Omega_{x}, \Omega_{b}\}$, and agent actions $\{A, B_{a}\}$
-\pause \item In our hand-washing system, $X = \{X_{turn}, X_{ps}, X_{aw}, X_{bahav}\}$
+\pause \item In our hand-washing system, $X = \{X_{turn}, X_{ps}, X_{aw}, X_{behav}\}$
 \pause \item Observations give evidence to the state variables
 \item Note: the ``confidence'' of $\Omega_b$ can be specified by $\gamma$, which is the variance of a normal (Gaussian) distribution.
 \pause \item Compute $X_{ps}'$ based on $\Omega_{x}$, $\Omega_{b}$ and $\{X, F, T\}$
-\pause \item Calculate $\{A, B_{a}\}$ based on $\{F, T, X\}$
+\pause \item Calculate $\{A, B_{a}\}$ based on $\{X, F, T\}$
 \end{itemize}
 \end{frame}
 
@@ -236,14 +238,18 @@ Use the BayesACT framework in the handwashing scenario
 \item Feature Selection
 \begin{itemize}
 \item analysis on facial expressions and speeches?
-\item not suitable due to special application scenario
-\item $E$ stays neutral
-\item $P$ scaled from the expansiveness of the user's two hands
-\item $A$ scaled from the moving speeds of the user's hands
+\item related research for this special application scenario hasn't been done yet
 \end{itemize}
 %describe the threshold-based method (i.e. piecewise linear interpolation)
+\pause
 \vspace{.3cm}
+\item Our approach
+\begin{itemize}
+\item $E$ stays neutral (value = 0); its value is ignored in the reasoning engine
+\item $P$ scaled from the expansiveness of the user's two hands
+\item $A$ scaled from the moving speeds of the user's hands
 \item Used piecewise linear interpolation method
+\end{itemize}
 \vspace{.3cm}
 \item ``Confidence'' of $\Omega_b$ can be specified in the reasoning engine
 \end{itemize}
@@ -365,6 +371,7 @@ Generally, user behaviours with higher $P$ and higher $A$ values may lead to
 \begin{itemize}
 \item client identities with higher $P$ and higher $A$ values
 \item system prompts with lower $P$ and higher $A$ values
+\item as predicted by the Affect Control Theory
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -409,8 +416,8 @@ I'd like to take this opportunity to thank:
 \begin{itemize}
 \item Jesse Hoey
 \item James Tung and Peter van Beek
-\item Chengbo Li, Xiao Yang and Enxun Wei
-\item My families and friends
+\item Stephen Czarnuch, Aarti Malhotra and Celia Yu
+\item Families and friends, especially Chengbo Li, Xiao Yang, Enxun Wei and Luyi Lin
 \end{itemize}
 \end{frame}
 %------------------------------------------------
