@@ -341,8 +341,10 @@ The system runs in real-time from the perspective of its user group
 %mention emotional responses in general
 Two laboratory tests
 \begin{itemize}
-\item link to test \#1
-\item link to test \#2
+\item washed hands while the system observed and assisted in real time
+\item acted more powerfully and more actively in the first test than the second
+\item link to video of test \#2
+\item results shown in thesis
 \end{itemize}
 \vspace{.3cm}
 Another 15 tests were also run. Results are in the Appendix.
@@ -356,28 +358,22 @@ Another 15 tests were also run. Results are in the Appendix.
 \item Functionality performance
 \begin{itemize}
 \item sometimes false positively recognizes an user behaviour
-\item is able to produce propositionally useful system prompts in general
+\item in general, is able to produce propositionally useful system prompts
 \end{itemize}
 %emotion updater - insert table & state the correlations found between EPA values
 \item Emotionality performance
-% table: Comparison of EPA values in the two tests
-\begin{table}
-\scriptsize
-\centering
-\begin{tabular}{|  p{0.3cm} | p{1.8cm} |  p{2.5cm} |  p{2.5cm} | p{2cm} |}
-\hline
-No. & mean of behav. & init of client identities & mean of client identities & mean of prompt \\ \hline
-\#1 & $[0,1.32,-1.3]$ & $[1.61,0.84,-0.87]$ &  $[2.8,1.03,-0.73]$ & $[1.62,0.32,0.75]$ \\ \hline
-\#2 & $[0,0.77,-1.74]$ & $[-0.64,-0.43,-1.81]$ & $[1.13,-0.43,-1.47]$ & $[1.53,0.66,0.08]$ \\ \hline
-\end{tabular}
-\end{table}
-\vspace{.3cm}
-Generally, user behaviours with higher $P$ and higher $A$ values may lead to
+% fig: Comparison of EPA values in the two tests
+\begin{columns}[c]
+\column{.6\textwidth}
+\includegraphics[trim=10mm 45mm 25mm 10mm, clip, width=\linewidth]{fig/fig-compare-two-tests.pdf}
+\column{.45\textwidth}
+Generally, user behaviours with higher $P$ and higher $A$ values lead to
 \begin{itemize}
 \item client identities with higher $P$ and higher $A$ values
 \item system prompts with lower $P$ and higher $A$ values
 \item as predicted by the Affect Control Theory
 \end{itemize}
+\end{columns}
 \end{itemize}
 \end{frame}
 
