@@ -146,15 +146,16 @@ The COACH system
 \subsection{Objectives}
 \begin{frame}
 \frametitle{Problem Statement - Objectives}
-To augment the COACH system with an emotional reasoning engine so that the augmented system:\\
+\begin{itemize}
+\item Using Emotional Intelligence in Assitive Systems
+\item To augment the COACH system with an emotional reasoning engine so that the augmented system:\\
 \begin{itemize}
 \item is designed in a portable and extensible way
 \item runs in real-time from the perspective of the user group
 \item provides a level of functional assistance
 \item produces the prompts according to the emotional state of a user
 \end{itemize}
-\vspace{.5cm}
-Using Emotional Intelligence in Assitive Systems is the future direction.
+\end{itemize}
 \end{frame}
 
 %-----------------------------------------------------------------
@@ -299,7 +300,7 @@ Use the BayesACT framework in the handwashing scenario
 %state how the original hand-tracker works
 \item Step 1: Get the locations of the user's hands
 \begin{itemize}
-\item bases on a body tracker implemented in previous work
+\item bases on a body tracker implemented in a previous work
 \item obtains locations of body parts from depth images taken from an overhead perspective
 \item was trained using partially labeled, unbalanced data, and is configurable and re-trainable
 \begin{figure}[htb]
@@ -339,7 +340,7 @@ Use the BayesACT framework in the handwashing scenario
 %describe the survey - insert figure: examples of the prompts
 \item The prompt dataset 
 \begin{itemize}
-\item 30 audio-visual prompts generated in previous study
+\item 30 audio-visual prompts generated in a previous study
 \item created using the USC Virtual Human Toolkit
 \item EPA values of videos evaluated by human raters
 \end{itemize}
@@ -374,7 +375,7 @@ Average latency of the system
 \item 1.70s in total
 \end{itemize}
 \vspace{.3cm}
-The system runs in real-time from the perspective of its user group
+The system runs in real-time from the perspective of its user group.
 \end{frame}
 
 \begin{frame}
@@ -385,12 +386,11 @@ The system runs in real-time from the perspective of its user group
 Two laboratory tests
 \begin{itemize}
 \item washed hands while the system observed and assisted in real time
-\item acted more powerfully and more actively in the first test than the second
-\item link to video of test \#2
+\item acted more powerfully and more actively in the first test than in the second
 \item results shown in thesis
 \end{itemize}
 \vspace{.3cm}
-Another 15 tests were also run. Results are in the Appendix.
+15 further tests were also run. Results are in the Appendix.
 \end{frame}
 
 \begin{frame}
@@ -400,8 +400,7 @@ Another 15 tests were also run. Results are in the Appendix.
 %planstep updater - they can update accordingly
 \item Functionality performance
 \begin{itemize}
-\item sometimes false positively recognizes an user behaviour
-\item in general, is able to produce propositionally useful system prompts
+\item In general, the system is able to produce propositionally useful system prompts.
 \end{itemize}
 %emotion updater - insert table & state the correlations found between EPA values
 \item Emotionality performance
@@ -414,8 +413,9 @@ Generally, user behaviours with higher $P$ and higher $A$ values lead to
 \begin{itemize}
 \item client identities with higher $P$ and higher $A$ values
 \item system prompts with lower $P$ and higher $A$ values
-\item as predicted by the Affect Control Theory
 \end{itemize}
+\vspace{.2cm}
+This is the same as predicted by the Affect Control Theory.
 \end{columns}
 \end{itemize}
 \end{frame}
@@ -429,16 +429,16 @@ Generally, user behaviours with higher $P$ and higher $A$ values lead to
 %state contribution of this paper
 Contribution
 \begin{itemize}
-\item Designed and implemented a prototypical hand-washing system that satisfies the objectives
-\item Tests also indicated a correlation between the EPA values of user behaviours, user identities, and system prompts
+\item designed, implemented and tested a prototypical hand-washing system that fullfills the objectives
+\item indicated a correlation between the EPA values of user behaviours, user identities, and system prompts
 \end{itemize}
 \vspace{.3cm}
 Future Work
 \begin{itemize}
-\item{Improve the EPA-Calculator}
-\item{Improve the prompt generation process}
-\item{Improve the Planstep- and Emotion- Updater}
-\item{Conduct clinical trials for the system}
+\item{improve the EPA-Calculator}
+\item{improve the reasoning engine}
+\item{generate better prompt datasets}
+\item{conduct clinical trials for the system}
 \end{itemize}
 \end{frame}
 
