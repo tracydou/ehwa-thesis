@@ -613,21 +613,16 @@ As shown in Tables~\ref{table:result-1} and ~\ref{table:result-2}, though the sy
 
 \section{Emotionality Performance of the System}
 
-To demonstrate that the system is able to work emotionally, this subsection compares the average of EPA values computed for user behaviours, for $f_c$'s, and for system prompts in tests \#1 and \#2. Table~\ref{table:compare-epa-the-two} shows a simple comparison of the EPA values in the two aforementioned tests. 
+To demonstrate that the system is able to work emotionally, this subsection compares the average of EPA values computed for user behaviours, for $f_c$'s, and for system prompts in tests \#1 and \#2. Figure~\ref{fig:compare-epa-the-two} shows a simple comparison of the EPA values in the two aforementioned tests. 
 
 %
 % table: Comparison of EPA values in the two tests
-\begin{table}\footnotesize
+\begin{figure}[htp]
 \centering
-\caption{Comparison of EPA values in the two tests}
-\label{table:compare-epa-the-two}
-\begin{tabular}{|  p{0.5cm} | p{2.1cm} |  p{3.1cm} |  p{2.9cm} |  p{2.9cm} | p{2.3cm} |}
-\hline
-Test & mean of user behav. & init of $f_c$ & final of $f_c$ & mean of $f_c$ & mean of system prompt \\ \hline
-t1 & $[0,1.32,-1.3]$ & $[1.61,0.84,-0.87]$ & $[3.31,1.04,-0.57]$ & $[2.8,1.03,-0.73]$ & $[1.62,0.32,0.75]$ \\ \hline
-t2 & $[0,0.77,-1.74]$ & $[-0.64,-0.43,-1.81]$ & $[1.83,-0.45,-1.24]$ & $[1.13,-0.43,-1.47]$ & $[1.53,0.66,0.08]$ \\ \hline
-\end{tabular}
-\end{table}
+\includegraphics[trim=10mm 35mm 25mm 35mm, clip, width=.8\linewidth]{fig/fig-compare-two-tests.pdf}
+\caption{Compare $P$ and $A$ values in the two tests}
+\label{fig:compare-epa-the-two}
+\end{figure}
 
 As shown in Tables~\ref{table:result-1} and ~\ref{table:result-2}, throughout the tests, the user behaviours in the first test generally had larger $P$ and larger $A$ values than those in the second test. The $P$ and $A$ values computed for user behaviours in test \#1 reached an average of $[1.32, -1.3]$, while that in the second test was $[0.77, -1.74]$. This phenomenon accords well with how the actor acted in the two tests, which illustrates that the $P$ and $A$ values of user behaviours computed by the EPA-Calculator are reasonable.
 

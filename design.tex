@@ -149,7 +149,7 @@ In our system implementation, if an open source package is used, it is used as i
 
 \begin{figure}[htp]
 \centering
-\includegraphics[trim = 10mm 40mm 10mm 20mm, clip, width=0.9\linewidth]{fig/fig-dataflow.pdf}
+\includegraphics[trim = 10mm 63mm 37mm 20mm, clip, width=0.9\linewidth]{fig/fig-dataflow.pdf}
 \caption{Data flow and logical relationship between components}
 \label{fig:dataflow}
 \end{figure}
@@ -171,9 +171,9 @@ The timings of the client requests and the server replies are carefully decided.
 
 The following three aspects should be carefully designed for the buffer: (1) the conditions which would trigger the buffer to transfer between states; (2) the buffer's size, i.e. the information processed for how many frames can be handled by the buffer; (3) the policy describing how overflowed messages are dealt with. The state machine shown in Figure~\ref{fig:state-trans} illustrates how the buffer is designed in this thesis. As shown in the figure, there are three states of the buffer. State A represents the state where the user performs a same user behaviour within neighbouring frames. Two conditions can trigger the buffer's state to transfer from State A to another state: (1) If a user behaviour different from the current stable behaviour is detected, then the state of the buffer would transfer to State B. If the new behaviour is found to last for less than a \textit{timeup} period, the state of the buffer would change back to State A, with the stable behaviour unchanged. (2) If the buffer has been in State A for a \textit{timeout} period, then the buffer would change to State C, where the state of the buffer would change back to State A immediately after messages encoding the current stable user behaviour are sent to the updaters. State B of the buffer checks if a newly detected user behaviour is a stable one. Similarly, there are two conditions that can trigger the buffer's state to transfer from State B to another state: (1) If the new user behaviour different from the current stable behaviour is found to last for at least a \textit{timeup} period, then the new user behaviour is considered stable. In that case, the state of the buffer would change to State C, where the buffer's state would change to State A immediately after messages encoding this new stable behaviour are sent to the updaters. (2) Otherwise, the buffer's state would change back to State A with the current stable user behaviour non-changed.
 
-\begin{figure}[htp]
+\begin{figure}[H]
 \centering
-\includegraphics[trim = 10mm 25mm 16mm 15mm, clip, width=0.8\linewidth]{fig/fig-state-trans.pdf}
+\includegraphics[trim = 10mm 60mm 50mm 17mm, clip, width=.85\linewidth]{fig/fig-state-trans.pdf}
 \caption{State transitions of the buffer between the Observer and the Updater}
 \label{fig:state-trans}
 \end{figure}
@@ -181,9 +181,9 @@ The following three aspects should be carefully designed for the buffer: (1) the
 
 \section{Summary}
 
-\begin{figure}[htp]
+\begin{figure}[h]
 \centering
-\includegraphics[trim = 0mm 15mm 0mm 20mm, clip, width=0.9\linewidth]{fig/fig-system.pdf}
+\includegraphics[trim = 0mm 15mm 0mm 20mm, clip, width=0.8\linewidth]{fig/fig-system.pdf}
 \caption{System design with server-client models}
 \label{fig:system}
 \end{figure}
