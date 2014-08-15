@@ -2,7 +2,50 @@
 \chapter{Detailed Test Results}
 \label{chap:appendix}
 
-This appendix shows detailed state changes of the 17 tests conducted on the system. The columns ``time'' in the tables indicate timesteps in the Planstep and Emotion Updater, where ``time = 0'' means at the time of initialization. The columns ``behav-prop.'' in the tables use the definition of behaviours shown in column ``Representation Number used in the Updater'' in Table~\ref{table:area-action}, and the columns of ``ps\_beliefs'' use the definition of plansteps shown in Table~\ref{table:heuristic-policy}. Finally, the columns ``prompt-prop.'' in the tables use the definition of prompts shown in column ``Representation number in Prompt-Selector'' in Table~\ref{table:prompt-number-def}. If ``prompt-epa = 0'', then it means that there was no actual prompt displayed at that timestep. No matter whether a prompt was displayed or not at a timestep, the value of ``prompt-epa'' at that timestep was produced by the updater based on the belief states at that time, and thus is included in calculating the mean of prompt-epa's for that run. For all these tests, the parameter settings as shown in Table~\ref{table:param-setting} were used.
+This appendix shows the EPA values rated by participants for the thirty prompts in the prompt dataset. It also shows detailed state changes of the 17 tests conducted on the system. The columns ``time'' in the tables indicate timesteps in the Planstep and Emotion Updater, where ``time = 0'' means at the time of initialization. The columns ``behav-prop.'' in the tables use the definition of behaviours shown in column ``Representation Number used in the Updater'' in Table~\ref{table:area-action}, and the columns of ``ps\_beliefs'' use the definition of plansteps shown in Table~\ref{table:heuristic-policy}. Finally, the columns ``prompt-prop.'' in the tables use the definition of prompts shown in column ``Representation number in Prompt-Selector'' in Table~\ref{table:prompt-number-def}. If ``prompt-epa = 0'', then it means that there was no actual prompt displayed at that timestep. No matter whether a prompt was displayed or not at a timestep, the value of ``prompt-epa'' at that timestep was produced by the updater based on the belief states at that time, and thus is included in calculating the mean of prompt-epa's for that run. For all these tests, the parameter settings as shown in Table~\ref{table:param-setting} were used.
+
+%% --------------------------------------------------------------------------
+% table: EPA values for the thirty prompts
+
+\begin{longtable}{|V{.3cm}|V{3.5cm}|V{4.2cm}|V{2.4cm}|V{3.6cm}|}
+\caption{EPA values rated to prompts}
+\\ \hline
+\# & EPA and type (expectations) & Sentence said by avatar & Purpose & EPA values (rated) \\ \hline 
+1 & EPA+++\_Discipline & Hi there, good to see you. Let's get started. Try turning on the water. & turn on water & $[ 2.50, 1.78, 1.11 ]$ \\ \hline
+2 & EPA+--\_Request & Hello, I am so glad to have you here. Please turn on the water. & turn on water & $ [2.50, 1.06, 1.00 ]$ \\ \hline
+3 & EPA-++\_Bossy & Hi. Let's start washing your hands. Turn on the water. & turn on water & $ [-0.28, 1.33, 1.06 ]$ \\ \hline
+4 & EPA---\_Bum & Hey. Came to wash your hands. Turn on the water if you want. & turn on water & $ [-2.28, -0.22, 0.06 ]$ \\ \hline
+5 & EPA+-+\_Childlike & I want you to turn the water on. & turn on water & $ [-0.22, 0.94, 0.89 ]$ \\ \hline
+6 & EPA+++\_Discipline & Try putting on some soap. & put on some soap & $ [1.56, 1.17, 1.35 ]$ \\ \hline
+7 & EPA+--\_Request & You are washing your hands. Please use the soap. & put on some soap & $ [1.22, 0.89, 0.72 ]$ \\ \hline
+8 & EPA-++\_Bossy & Now use the soap. & put on some soap & $ [-1.50, 1.67, 1.44 ]$ \\ \hline
+9 & EPA---\_Bum & If you want to put on some soap, there is a soap pump lying around. & put on some soap & $ [-0.94, -0.67, 0.00 ]$ \\ \hline
+10 & EPA+-+\_Childlike & I want you to put on some soap. & put on some soap & $ [0.39, 1.78, 1.50 ]$ \\ \hline
+11 & EPA+++\_Discipline & Try rinsing your hands. & rinse hands & $ [0.44, 0.33, 1.28 ]$ \\ \hline
+12 & EPA+--\_Request & Please rinse your hands. & rinse hands & $ [2.28, 1.33, 1.11 ]$ \\ \hline
+13 & EPA-++\_Bossy & Rinse your hands now. & rinse hands & $ [-1.83, 1.83, 2.00 ]$ \\ \hline
+14 & EPA---\_Bum & Rinse your hands if you want. & rinse hands & $ [-1.50, -1.56, -0.11 ]$ \\ \hline
+15 & EPA+-+\_Childlike & Can I get your hands rinsed? & rinse hands & $ [1.22, 0.56, 1.11 ]$ \\ \hline
+16 & EPA+++\_Discipline & Try turning off the water. & turn off water & $ [1.11, 0.94, 0.89 ]$ \\ \hline
+17 & EPA+--\_Request & Please turn the water off. Thank you. & turn off water & $ [2.50, 1.22, 0.94 ]$ \\ \hline
+18 & EPA-++\_Bossy & Will you turn off the water now? & turn off water & $ [-1.94, 1.56, 1.67 ]$ \\ \hline
+19 & EPA---\_Bum & Turn the water off when done. & turn off water & $ [-0.17, 1.28, 0.72 ]$ \\ \hline
+20 & EPA+-+\_Childlike & I want you to turn off the water. & turn off water & $ [0.24, 1.47, 1.29 ]$ \\ \hline
+21 & EPA+++\_Discipline & Good job. Try using the towel to dry your hands. & dry up hands & $ [2.28, 1.22, 1.33 ]$ \\ \hline
+22 & EPA+--\_Request & You are doing great. Please dry your hands using the towel. & dry up hands & $ [2.89, 1.56, 0.50 ]$ \\ \hline
+23 & EPA-++\_Bossy & Now dry your hands. & dry up hands & $ [-1.44, 1.61, 1.28 ]$ \\ \hline
+24 & EPA---\_Bum & There is a towel somewhere to dry your hands. & dry up hands & $ [-1.39, -1.61, -0.44 ]$ \\ \hline
+25 & EPA+-+\_Childlike & Can I get your hands dried up? & dry up hands & $ [1.44, 1.11, 1.17 ]$ \\ \hline
+26 & EPA+++\_Discipline & Goodbye. Hope to see you soon. & indicating all is done & $ [2.11, 0.44, 0.11 ]$ \\ \hline
+27 & EPA+--\_Request & Please come back. I shall wait for you. & indicating all is done & $ [1.50, -0.11, 0.11 ]$ \\ \hline
+28 & EPA-++\_Bossy & You are done. Leave now. & indicating all is done & $ [-2.67, 1.94, 1.44 ]$ \\ \hline
+29 & EPA---\_Bum & Will see you whatever. & indicating all is done & $ [-2.67, -0.83, 0.22 ]$ \\ \hline
+30 & EPA+-+\_Childlike & Can you come back soon? & indicating all is done & $ [1.06, 0.12, 0.47 ]$ \\ \hline
+\end{longtable}
+
+%% --------------------------------------------------------------------------
+
+
 
 
 %% -----------------------------------------------------------------------
